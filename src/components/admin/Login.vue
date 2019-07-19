@@ -78,7 +78,15 @@ export default {
       this.$refs[name].validate((valid) => {
         const data = this.$refs[name].model
         if (valid) {
-          console.log(data)
+          axios.post('/user/login', {
+            userName: data.userName,
+            password: data.password
+          }).then(response => {
+            const data = response.data
+            if (data.code === 200) {
+              this.$Message.success('登录成功')
+            }
+          })
         } else {
         }
       })
