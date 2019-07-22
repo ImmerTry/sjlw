@@ -1,11 +1,11 @@
 <template>
   <div class="header">
     <Row>
-      <Col span="10">
+      <Col :xs="24" :sm="10" :md="10">
         <div class="header-left">
           <span>Logo</span>
           <div class="slider">
-            <Dropdown trigger="click" style="margin-left: 20px">
+            <Dropdown trigger="click" placement="left-start">
               <a href="javascript:void(0)">
                 <Icon type="md-menu"/>
               </a>
@@ -19,7 +19,7 @@
           </div>
         </div>
       </Col>
-      <Col span="14">
+      <Col :xs="0" :sm="14" :md="14">
         <div class="header-right">
           <Menu mode="horizontal">
             <MenuItem name="1" to="/">
@@ -74,16 +74,13 @@ export default {
         }
         .slider {
           font-size: 26px;
+          width: 60px;
           height: 60px;
           line-height: 60px;
           float: right;
           a {
           }
         }
-      }
-      .header-right {
-        display: none;
-        overflow: hidden;
       }
     }
 }
