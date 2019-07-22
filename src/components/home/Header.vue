@@ -3,7 +3,20 @@
     <Row>
       <Col span="10">
         <div class="header-left">
-          This is Logo
+          <span>Logo</span>
+          <div class="slider">
+            <Dropdown trigger="click" style="margin-left: 20px">
+              <a href="javascript:void(0)">
+                <Icon type="md-menu"/>
+              </a>
+            <DropdownMenu slot="list">
+                <DropdownItem>新闻动态</DropdownItem>
+                <DropdownItem>案例展示</DropdownItem>
+                <DropdownItem>关于我们</DropdownItem>
+                <DropdownItem>联系我们</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+          </div>
         </div>
       </Col>
       <Col span="14">
@@ -33,7 +46,12 @@
 
 <script>
 export default {
-  name: 'Header'
+  name: 'Header',
+  data () {
+    return {
+      value: false
+    }
+  }
 }
 </script>
 
@@ -44,14 +62,28 @@ export default {
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     .header {
-      background: red;
+      // background: red;
       .header-left {
         width: 100%;
         height: 60px;
-        text-align: center;
+        span {
+          float: left;
+          font-size: 26px;
+          height: 60px;
+          line-height: 60px;
+        }
+        .slider {
+          font-size: 26px;
+          height: 60px;
+          line-height: 60px;
+          float: right;
+          a {
+          }
+        }
       }
       .header-right {
         display: none;
+        overflow: hidden;
       }
     }
 }
@@ -62,6 +94,9 @@ export default {
       background: green;
       .header-left {
         width: 100%;
+        .slider {
+          display: none;
+        }
       }
       .header-right {
         width: 100%;
@@ -84,6 +119,9 @@ export default {
         width: 100%;
         height: 60px;
         padding: 10px 10px;
+        .slider {
+          display: none;
+        }
       }
     }
 }
@@ -97,6 +135,9 @@ export default {
         height: 60px;
         line-height: 60px;
         text-align: center;
+        .slider {
+          display: none;
+        }
       }
       .header-right {
         width: 100%;
@@ -119,6 +160,9 @@ export default {
         height: 60px;
         line-height: 60px;
         text-align: center;
+        .slider {
+          display: none;
+        }
       }
       .header-right {
         width: 100%;
