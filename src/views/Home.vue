@@ -3,8 +3,9 @@
     <Header></Header>
     <Carousel></Carousel>
     <Content></Content>
-    <Demo></Demo>
     <Data></Data>
+    <Demo></Demo>
+    <Footer></Footer>
   </div>
 </template>
 
@@ -14,6 +15,7 @@ import Carousel from '../components/home/Carousel'
 import Content from '../components/home/Content'
 import Demo from '../components/home/Demo'
 import Data from '../components/home/Data'
+import Footer from '../components/home/Footer'
 
 export default {
   name: 'home',
@@ -22,7 +24,8 @@ export default {
     Carousel,
     Content,
     Demo,
-    Data
+    Data,
+    Footer
   }
 }
 </script>

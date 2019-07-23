@@ -1,16 +1,16 @@
 <template>
-    <div class="data">
+    <div class="footer">
     </div>
 </template>
 <script>
 export default {
-  name: 'Data'
+  name: 'Footer'
 }
 </script>
 <style lang="less" scoped>
-    .data {
+    .footer {
         width: 100%;
-        height: 600px;
-        background: #2B5F75;
+        height: 400px;
+        background: #F05E1C;
     }
 </style>

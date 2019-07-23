@@ -13,15 +13,18 @@
       </div>
       <div class="page">下一页</div>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 <script>
 import Header from '../home/Header'
+import Footer from '../home/Footer'
 
 export default {
   name: 'Detail',
   components: {
-    Header
+    Header,
+    Footer
   },
   data  () {
     return {

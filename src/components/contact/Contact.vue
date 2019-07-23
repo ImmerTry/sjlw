@@ -67,17 +67,20 @@
         </Col>
       </Row>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 <script>
 import Header from '../home/Header'
 import Map from './Map'
+import Footer from '../home/Footer'
 
 export default {
   name: 'Contact',
   components: {
     Header,
-    Map
+    Map,
+    Footer
   },
   data () {
     return {

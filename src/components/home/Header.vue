@@ -1,40 +1,50 @@
 <template>
   <div class="header">
     <Row>
-      <Col :xs="24" :sm="10" :md="10">
+      <Col :xs="24" :md="9" :lg="12" :xl="16">
         <div class="header-left">
-          <span>Logo</span>
+          <router-link to="/">
+            <span>Logo</span>
+          </router-link>
           <div class="slider">
-            <Dropdown trigger="click" placement="left-start">
+            <Dropdown trigger="click" placement="left-start" @on-click="changeUrl">
               <a href="javascript:void(0)">
                 <Icon type="md-menu"/>
               </a>
             <DropdownMenu slot="list">
-                <DropdownItem>新闻动态</DropdownItem>
-                <DropdownItem>案例展示</DropdownItem>
-                <DropdownItem>关于我们</DropdownItem>
-                <DropdownItem>联系我们</DropdownItem>
+              <router-link to="/news">
+                <DropdownItem name="news" :selected="selected">新闻动态</DropdownItem>
+              </router-link>
+              <router-link to="/demo">
+                <DropdownItem name="demo" :selected="selected">案例展示</DropdownItem>
+              </router-link>
+              <router-link to="/about">
+                <DropdownItem name="about" :selected="selected">关于我们</DropdownItem>
+              </router-link>
+              <router-link to="/contact">
+                <DropdownItem name="contact" :selected="selected">联系我们</DropdownItem>
+              </router-link>
             </DropdownMenu>
           </Dropdown>
           </div>
         </div>
       </Col>
-      <Col :xs="0" :sm="14" :md="14">
+      <Col :xs="0" :md="15" :lg="12" :xl="8">
         <div class="header-right">
           <Menu mode="horizontal">
-            <MenuItem name="1" to="/">
+            <MenuItem name="index" to="/">
               首页
             </MenuItem>
-            <MenuItem name="2" to="/news">
+            <MenuItem name="news" to="/news">
               新闻动态
             </MenuItem>
-            <MenuItem name="3" to="/demo">
+            <MenuItem name="demo" to="/demo">
               案例展示
             </MenuItem>
-            <MenuItem name="4" to="/about">
+            <MenuItem name="about" to="/about">
               关于我们
             </MenuItem>
-            <MenuItem name="5" to="/contact">
+            <MenuItem name="contact" to="/contact">
               联系我们
             </MenuItem>
           </Menu>
@@ -49,8 +59,18 @@ export default {
   name: 'Header',
   data () {
     return {
-      value: false
+      selected: false
     }
+  },
+  methods: {
+    changeUrl (name) {
+      if (name === 'news') {
+        this.selected = true
+      }
+    }
+  },
+  mounted () {
+    this.changeUrl()
   }
 }
 </script>
@@ -71,6 +91,7 @@ export default {
           font-size: 26px;
           height: 60px;
           line-height: 60px;
+          display: block;
         }
         .slider {
           font-size: 26px;
@@ -79,6 +100,7 @@ export default {
           line-height: 60px;
           float: right;
           a {
+            color: black;
           }
         }
       }
@@ -87,35 +109,22 @@ export default {
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-    .header {
-      background: green;
-      .header-left {
-        width: 100%;
-        .slider {
-          display: none;
-        }
-      }
-      .header-right {
-        width: 100%;
-        height: 60px;
-        ul {
-          li {
-            margin: 0 10px;
-            font-size: 14px;
-          }
-        }
-      }
-    }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
     .header {
-      background: yellowgreen;
+      background: red;
       .header-left {
         width: 100%;
         height: 60px;
-        padding: 10px 10px;
+        span {
+          line-height: 60px;
+          font-size: 26px;
+          width: 100%;
+          text-align: center;
+          display: block;
+        }
         .slider {
           display: none;
         }

@@ -29,11 +29,13 @@
         </div>
       </Row>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 <script>
 import Header from '../home/Header'
 import imgUrl from '../../assets/images/demoPic.png'
+import Footer from '../home/Footer'
 
 export default {
   name: 'Demo',
@@ -68,7 +70,8 @@ export default {
     }
   },
   components: {
-    Header
+    Header,
+    Footer
   }
 }
 </script>

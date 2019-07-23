@@ -25,16 +25,19 @@
           </ul>
         </div>
       </div>
+      <Footer></Footer>
     </div>
 </template>
 <script>
 import Header from '../home/Header'
+import Footer from '../home/Footer'
 import img from '../../assets/images/newsImg.png'
 
 export default {
   name: 'News',
   components: {
-    Header
+    Header,
+    Footer
   },
   data () {
     return {
