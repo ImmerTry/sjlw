@@ -1,7 +1,7 @@
 <template>
     <div class="login">
         <Row>
-            <Col span="12">
+            <Col :xs="12" :md="12" :lg="12" :xl="12">
                 <div class="left">
                     <div class="text">
                         <div class="item">
@@ -19,7 +19,7 @@
                     </div>
                 </div>
             </Col>
-            <Col span="12">
+            <Col :xs="12" :md="12" :lg="12" :xl="12">
                 <div class="right">
                     <div class="LoginHeader">
                         <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>

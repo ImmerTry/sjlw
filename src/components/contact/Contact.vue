@@ -5,7 +5,7 @@
     </div>
     <div class="content">
       <Row>
-        <Col span="12">
+        <Col :xs="24" :md="{span:10,offset:1}" :lg="{span:10,offset:1}" :xl="{span:8,offset:4}">
           <div class="context">
             <h1>联系我们</h1>
             <p>优质建筑的精品，创新求实的精神，热情服务的承诺，良好诚实的信誉。安全管理制度化，安全制度标准化，作业行为规范化，环境影响小化。以人为本；不断创新。</p>
@@ -13,7 +13,7 @@
           <div class="form">
             <h1>留下您的联系方式</h1>
             <Form ref="formValidate" class="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
-              <FormItem label="姓氏" prop="name">
+              <FormItem label="姓氏" prop="name" >
                   <Input v-model="formValidate.name" placeholder="姓氏"></Input>
               </FormItem>
               <FormItem label="邮箱" prop="mail">
@@ -35,7 +35,7 @@
             </Form>
           </div>
         </Col>
-        <Col span="12">
+        <Col :xs="24" :md="{span:10,offset:2}" :lg="{span:10,offset:2}" :xl="{span:8,offset:1}">
           <div class="wrapper">
             <Map></Map>
           </div>
@@ -126,6 +126,8 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+// xs
+@media only screen and (max-width: 600px) {
   .banner {
     background-repeat: no-repeat;
     background-size: 100% auto, auto;
@@ -138,47 +140,44 @@ export default {
     width: 100%;
     height: 100%;
     margin: 0 auto;
-    // border: 1px solid red;
     .context h1 {
-      width: 500px;
-      padding-left: 80px;
+      width: 100%;
+      padding: 0 40px;
       margin-top: 40px;
       font-size: 22px;
       color: #1A2B4A;
     }
     .context p {
-      width: 600px;
-      padding-left: 80px;
+      width: 100%;
+      padding:0 40px;
       margin-top: 30px;
       font-size: 14px;
       color: #666666;
       text-align: center
     }
     .form {
-      width: 500px;
+      width: 100%;
       h1 {
-        padding-left: 80px;
+        padding: 0 40px;
         margin-top: 40px;
         font-size: 22px;
         color: #1A2B4A;
       }
       .formValidate {
         margin-top: 30px;
-        padding-left: 45px;
+        padding-right: 40px;
       }
     }
     .wrapper {
-      margin-top: 60px;
-      width: 90%;
+      margin-top: 30px;
+      width: 100%;
       height: 300px;
+      padding: 0 40px;
     }
     .info {
-      width: 90%;
-      margin-top: 40px;
-      // border:1px solid red;
+      width: 100%;
+      margin: 30px 0;
       .icon {
-        // border: 1px solid yellowgreen;
-        // width: 200px;
         margin: 0 auto;
         span {
           display: block;
@@ -192,5 +191,89 @@ export default {
       }
     }
   }
-
+}
+// md
+@media only screen and (min-width: 768px) {
+   .banner {
+    background-repeat: no-repeat;
+    background-size: 100% auto, auto;
+    height: 0;
+    padding-bottom: 31%;
+    overflow: hidden;
+    background-image: url('https://assets.aiyaopai.com/3.0/home/head.png');
+  }
+  .content {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    .context h1 {
+      width: 100%;
+      margin-top: 40px;
+      font-size: 22px;
+      color: #1A2B4A;
+    }
+    .context p {
+      width: 100%;
+      margin-top: 30px;
+      font-size: 14px;
+      color: #666666;
+      text-align: center
+    }
+    .form {
+      width: 100%;
+      h1 {
+        margin-top: 40px;
+        font-size: 22px;
+        color: #1A2B4A;
+      }
+      .formValidate {
+        margin-top: 30px;
+        padding-right: 40px;
+      }
+    }
+    .wrapper {
+      margin-top: 40px;
+      width: 100%;
+      height: 300px;
+    }
+    .info {
+      width: 100%;
+      margin: 30px 0;
+      .icon {
+        margin: 0 auto;
+        span {
+          display: block;
+          font-size: 30px;
+          text-align: center
+        }
+        .text {
+          font-size: 12px;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+// lg
+@media only screen and (min-width: 992px) {
+  .banner {
+    background-repeat: no-repeat;
+    background-size: 100% auto, auto;
+    height: 0;
+    padding-bottom: 31%;
+    overflow: hidden;
+    background-image: url('https://assets.aiyaopai.com/3.0/home/head.png');
+  }
+}
+// xl
+@media only screen and (min-width: 1200px) {
+  .banner {
+    background-repeat: no-repeat;
+    background-size: 100% auto, auto;
+    height: 0;
+    padding-bottom: 31%;
+    overflow: hidden;
+    background-image: url('https://assets.aiyaopai.com/3.0/home/head.png');
+  }
+}
 </style>

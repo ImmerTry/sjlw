@@ -6,14 +6,14 @@
                 <!-- <div class="context">一条龙建筑服务行业</div> -->
             </Col>
         </Row>
-        <Row :gutter="30">
-            <Col :xs="24" :md="8" :lg="8" :xl="8">
+        <Row>
+            <Col :xs="24" :md="{span: 6,offset:1}" :lg="{span: 6,offset:1}" :xl="{span: 6,offset:1}">
                 <div class="service"></div>
             </Col>
-            <Col :xs="24" :md="8" :lg="8" :xl="8">
+            <Col :xs="24" :md="{span: 6,offset:2}" :lg="{span: 6,offset:2}" :xl="{span: 6,offset:2}">
                 <div class="service"></div>
             </Col>
-            <Col :xs="24" :md="8" :lg="8" :xl="8">
+            <Col :xs="24" :md="{span: 6,offset:2}" :lg="{span: 6,offset:2}" :xl="{span: 6,offset:2}">
                 <div class="service"></div>
             </Col>
         </Row>
@@ -25,37 +25,29 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-// sm
+// xs
 @media only screen and (max-width: 600px) {
      .content {
         width: 100%;
         height: 100%;
-        line-height: 488px;
-        text-align: center;
         background: #f5f5f5;
-         margin: 40px 0;
-        // display: flex;
+        margin: 40px 0;
         .title {
             margin: 40px 0;
             width: 100%;
             height: 40px;
             line-height: 40px;
-            // text-align: center;
-            float: left;
-            font-size: 32px;
-            font-weight: 500;
+            font-size: 30px;
+            text-align: center;
             color: #1a2b4a;
         }
         .context {
             width: 100%;
             height: 40px;
             line-height: 40px;
-            // text-align: center;
             float: left;
         }
         .service {
-            // margin-top: 50px;
-            // margin-left: 35px;
             width: 100%;
             height: 328px;
             border: 1px solid red;
@@ -67,17 +59,14 @@ export default {
      .content {
         width: 100%;
         height: 100%;
-        line-height: 488px;
         text-align: center;
         background: #f5f5f5;
          margin: 40px 0;
-        // display: flex;
         .title {
             margin: 40px 0;
             width: 100%;
             height: 40px;
             line-height: 40px;
-            // text-align: center;
             float: left;
             font-size: 32px;
             font-weight: 500;
@@ -87,12 +76,9 @@ export default {
             width: 100%;
             height: 40px;
             line-height: 40px;
-            // text-align: center;
             float: left;
         }
         .service {
-            // margin-top: 50px;
-            // margin-left: 35px;
             width: 100%;
             height: 328px;
             background: #F19483;
@@ -105,17 +91,14 @@ export default {
      .content {
         width: 100%;
         height: 100%;
-        line-height: 488px;
         text-align: center;
         background: #f5f5f5;
          margin: 40px 0;
-        // display: flex;
         .title {
             margin: 40px 0;
             width: 100%;
             height: 40px;
             line-height: 40px;
-            // text-align: center;
             float: left;
             font-size: 32px;
             font-weight: 500;
@@ -125,12 +108,9 @@ export default {
             width: 100%;
             height: 40px;
             line-height: 40px;
-            // text-align: center;
             float: left;
         }
         .service {
-            // margin-top: 50px;
-            // margin-left: 35px;
             width: 100%;
             height: 328px;
             background: #F19483;
@@ -143,7 +123,6 @@ export default {
      .content {
         width: 100%;
         height: 100%;
-        line-height: 488px;
         text-align: center;
         background: #f5f5f5;
          margin: 40px 0;
@@ -153,7 +132,6 @@ export default {
             width: 100%;
             height: 40px;
             line-height: 40px;
-            // text-align: center;
             float: left;
             font-size: 32px;
             font-weight: 500;
@@ -163,12 +141,9 @@ export default {
             width: 100%;
             height: 40px;
             line-height: 40px;
-            // text-align: center;
             float: left;
         }
         .service {
-            // margin-top: 50px;
-            // margin-left: 35px;
             width: 100%;
             height: 328px;
             background: #F19483;

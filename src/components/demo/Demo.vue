@@ -9,7 +9,7 @@
     <div class="item">
       <Row>
         <div class="item-demo" v-for="item of itemList" :key="item.id">
-          <Col :xs="{span: 20, offset: 2}" :md="{span: 16, offset: 4}" :lg="{span: 20, offset: 2}" :xl="{span:22,offset:1}">
+          <Col :xs="{span: 20, offset: 2}" :md="{span: 16, offset: 4}" :lg="{span: 20, offset: 2}" :xl="{span:18,offset:4}">
             <div class="picture">
                 <div class="img">
                   <img :src="item.imgUrl" alt="">

@@ -29,29 +29,36 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-  .banner {
+// xs
+@media only screen and (max-width: 600px) {
+ .banner {
     background-image: url('https://assets.aiyaopai.com/3.0/home/headbg.png');
     background-repeat: no-repeat;
-    background-size: 100% auto, auto;
-    height: 250px;
+    background-size: 100% auto;
+    height: 65px;
     overflow: hidden;
   }
   .artical {
-    width: 744px;
-    height: 496px;
+    width: 100%;
+    height: auto;
     margin: 40px auto 0;
+    img {
+      padding:0 20px;
+      width: 100%;
+    }
   }
   .content {
     width: 100%;
     height: 100%;
     margin: 0 auto;
     max-width: 1024px;
+    padding: 0 20px;
     span {
       font-size: 24px;
-      font-weight: 400;
+      font-weight: 300;
       color:  #5B6272;
       // line-height: 26px;
-      margin-bottom: 35px;
+      margin-bottom: 10px;
       display: block;
     }
     p {
@@ -59,7 +66,92 @@ export default {
       text-indent: 2em;
       line-height: 32px;
       margin: 0;
-      margin-bottom: 35px;
+      margin-bottom: 15px;
     }
   }
+}
+// md
+@media only screen and (min-width: 768px) {
+  .banner {
+    background-image: url('https://assets.aiyaopai.com/3.0/home/headbg.png');
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    height: 135px;
+    overflow: hidden;
+  }
+  .artical {
+    width: 100%;
+    height: auto;
+    margin: 40px auto 0;
+    img {
+      padding:0 80px;
+      width: 100%;
+    }
+  }
+  .content {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    max-width: 1024px;
+      padding:0 60px;
+    span {
+      font-size: 24px;
+      font-weight: 400;
+      color:  #5B6272;
+      margin-bottom: 10px;
+      display: block;
+    }
+    p {
+      font-size: 16px;
+      text-indent: 2em;
+      line-height: 32px;
+      margin: 0;
+      margin-bottom: 15px;
+    }
+  }
+}
+// lg
+@media only screen and (min-width: 992px) {
+  .banner {
+    background-image: url('https://assets.aiyaopai.com/3.0/home/headbg.png');
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    height: 180px;
+    overflow: hidden;
+  }
+  .artical {
+    width: 100%;
+    height: auto;
+    margin: 40px auto 0;
+    text-align: center;
+    img {
+      width: 744px;
+    // height: 496px;
+    // // width: 100%;
+    // height: 100%;
+    }
+  }
+}
+// xl
+@media only screen and (min-width: 1200px) {
+  .banner {
+    background-image: url('https://assets.aiyaopai.com/3.0/home/headbg.png');
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    height: 280px;
+    overflow: hidden;
+  }
+  .artical {
+    width: 100%;
+    height: auto;
+    margin: 40px auto 0;
+    text-align: center;
+    img {
+      width: 744px;
+    // height: 496px;
+    // // width: 100%;
+    // height: 100%;
+    }
+  }
+}
 </style>

@@ -7,20 +7,26 @@
         <div class="list">
           <ul>
             <router-link tag="li" :to="'/detail/' + item.id"  class="item border-bottom" v-for="item of recommendList" :key="item.id">
-              <div class="img">
-                <img class="item-img" :src="item.imgUrl">
-              </div>
-              <div class="item-info">
-                <p class="item-title">
-                  {{ item.title }}
-                </p>
-                <p class="item-desc">
-                  {{ item.desc }}
-                </p>
-                <p class="item-time">
-                  {{ item.time }}
-                </p>
-              </div>
+              <Row>
+                <Col :xs="24" :md="{ span: 13, offset: 1 }" :lg="{ span: 11, offset: 3 }" :xl="{ span: 8, offset: 6 }">
+                  <div class="item-info">
+                    <p class="item-title">
+                      {{ item.title }}
+                    </p>
+                    <p class="item-desc">
+                      {{ item.desc }}
+                    </p>
+                    <p class="item-time">
+                      {{ item.time }}
+                    </p>
+                  </div>
+                </Col>
+                <Col :xs="24" :md="{ span: 8, offset: 1 }" :lg="{ span: 6, offset: 1 }" :xl="{ span: 4, offset: 1 }">
+                  <div class="img">
+                    <img class="item-img" :src="item.imgUrl">
+                  </div>
+                </Col>
+              </Row>
             </router-link>
           </ul>
         </div>
@@ -71,25 +77,87 @@ export default {
     background-image: url('../../assets/images/newstop.png');
     background-repeat: no-repeat;
     background-size: 100% auto;
-    height: 60px;
+    height: 65px;
   }
   .content {
     width: 100%;
     height: 100%;
     padding-top: 2rem;
-    // background: yellowgreen;
     .list {
       margin: 0 auto;
-      width: 62.5rem;
+      width: 100%;
       // height: 3rem;
       .item {
-        display: flex;
+        height: 240px;
+        overflow: hidden;
+        transition: all .2s ease;
+        // box-sizing: border-box;
+        .img {
+          width: 100%;
+          padding:0 10px;
+          .item-img {
+            width: 100%;
+            height: 180px;
+          }
+        }
+        .item-info {
+          width: 100%;
+          height: 36px;
+          padding:10px;
+          .item-title {
+            line-height: 16px;
+            font-size: 16px;
+            color: #333333;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis; //显示省略符号来代表被修剪的文本。
+          }
+          .item-desc {
+           display: none;
+          }
+          .item-time {
+           display: none;
+          }
+        }
+      }
+      .item:hover {
+        // box-shadow: 0 -1px 10px rgba(0,0,0,.5);
+        box-shadow:rgba(0,0,0,.12) 0 -1px 10px;
+        border-radius: 4px;
+        // transform: scale(1);
+        background: #ffffff;
+        cursor:pointer;
+        .item-title {
+          color:#fe7600;
+        }
+      }
+    }
+  }
+}
+// md
+@media only screen and (min-width: 768px) {
+  .banner {
+    background-image: url('../../assets/images/newstop.png');
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    height: 135px;
+  }
+  .content {
+    width: 100%;
+    height: 100%;
+    padding-top: 2rem;
+    .list {
+      margin: 0 auto;
+      width:100%;
+      // height: 3rem;
+      .item {
+        width: 100%;
         height: 10.625rem;
         overflow: hidden;
         transition: all .2s ease;
         // box-sizing: border-box;
         .img {
-          width: 300px;
+          width: 100%;
           height: 10.625rem;
           padding: .625rem 0 .625rem 0.625rem;
           .item-img {
@@ -99,9 +167,7 @@ export default {
           }
         }
         .item-info {
-          flex: 1;
           padding: 1.1rem 0 0 1.5rem;
-          min-width: 0;
           .item-title {
             line-height: 1.25rem;
             font-size: 1.25rem;
@@ -123,7 +189,7 @@ export default {
             margin-top: 1rem;
             line-height: 1rem;
             font-size: .875rem;
-            padding: .2rem 0 0 36rem;
+            // padding: .2rem 0 0 36rem;
             color: #c2c2c2;
           }
         }
@@ -142,81 +208,22 @@ export default {
     }
   }
 }
-// md
-@media only screen and (min-width: 768px) {
-}
 // lg
 @media only screen and (min-width: 992px) {
+  .banner {
+    background-image: url('../../assets/images/newstop.png');
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    height: 180px;
+  }
 }
 // xl
 @media only screen and (min-width: 1200px) {
+  .banner {
+    background-image: url('../../assets/images/newstop.png');
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    height: 280px;
+  }
 }
-// .content {
-//     width: 100%;
-//     height: 100%;
-//     padding-top: 2rem;
-//     // background: yellowgreen;
-//     .list {
-//       margin: 0 auto;
-//       width: 62.5rem;
-//       // height: 3rem;
-//       .item {
-//         display: flex;
-//         height: 10.625rem;
-//         overflow: hidden;
-//         transition: all .2s ease;
-//         // box-sizing: border-box;
-//         .img {
-//           width: 300px;
-//           height: 10.625rem;
-//           padding: .625rem 0 .625rem 0.625rem;
-//           .item-img {
-//             width: 100%;
-//             height: 100%;
-//             border-radius: .5rem;
-//           }
-//         }
-//         .item-info {
-//           flex: 1;
-//           padding: 1.1rem 0 0 1.5rem;
-//           min-width: 0;
-//           .item-title {
-//             line-height: 1.25rem;
-//             font-size: 1.25rem;
-//             color: #333333;
-//             overflow: hidden;
-//             white-space: nowrap;
-//             text-overflow: ellipsis; //显示省略符号来代表被修剪的文本。
-//           }
-//           .item-desc {
-//             margin-top: 1rem;
-//             line-height: 1.125rem;
-//             font-size: 1rem;
-//             color: #666666;
-//             overflow: hidden;
-//             // white-space: nowrap;
-//             text-overflow: ellipsis; //显示省略符号来代表被修剪的文本。
-//           }
-//           .item-time {
-//             margin-top: 1rem;
-//             line-height: 1rem;
-//             font-size: .875rem;
-//             padding: .2rem 0 0 36rem;
-//             color: #c2c2c2;
-//           }
-//         }
-//       }
-//       .item:hover {
-//         // box-shadow: 0 -1px 10px rgba(0,0,0,.5);
-//         box-shadow:rgba(0,0,0,.12) 0 -1px 10px;
-//         border-radius: 4px;
-//         // transform: scale(1);
-//         background: #ffffff;
-//         cursor:pointer;
-//         .item-title {
-//           color:#fe7600;
-//         }
-//       }
-//     }
-//   }
 </style>
