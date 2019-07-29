@@ -10,9 +10,9 @@
                                     <span class="Icon"></span>
                                 </div>
                                 <h1 class="tips">后台登录</h1>
-                                <Button class="register" type="primary" shape="circle" long>注册</Button>
+                                <Button class="register" type="primary" shape="circle" long @click="showSignup()">注册</Button>
                                 <br><br>
-                                <Button class="LoginBtn" type="primary" ghost shape="circle" long>登录</Button>
+                                <Button class="LoginBtn" type="primary" ghost shape="circle" long to='/signin'>登录</Button>
                             </div>
                         </div>
                     </Col>
@@ -64,10 +64,10 @@
                 <Row>
                     <div class="btn-group">
                         <Col :xs="{span:10,offset:1}" :md="{span:6,offset:6}" :lg="12" :xl="12" >
-                            <Button type="primary" shape="circle">注册</Button>
+                            <Button type="primary" shape="circle"  @click="showSignup()">注册</Button>
                         </Col>
                         <Col :xs="{span:10,offset:2}" :md="{span:6,offset:1}" :lg="12" :xl="12">
-                            <Button type="primary" ghost shape="circle">登录</Button>
+                            <Button type="primary" ghost shape="circle" to='/signin'>登录</Button>
                         </Col>
                     </div>
                 </Row>
@@ -79,9 +79,9 @@
                             <span class="Icon"></span>
                         </div>
                         <h1 class="tips">后台登录</h1>
-                        <Button class="register" type="primary" shape="circle" long>注册</Button>
+                        <Button class="register" type="primary" shape="circle" long  @click="showSignup()">注册</Button>
                         <br><br>
-                        <Button class="LoginBtn" type="primary" ghost shape="circle" long>登录</Button>
+                        <Button class="LoginBtn" type="primary" ghost shape="circle" long to='/signin'>登录</Button>
                     </div>
                 </div>
             </Col>
@@ -93,10 +93,12 @@
                 </div>
             </Col>
         </Row> -->
+        <Signup :showHandlerFlag="showHandlerFlag"></Signup>
     </div>
 </template>
 <script>
 import axios from 'axios'
+import Signup from './Signin'
 export default {
   name: 'login',
   data () {
@@ -116,6 +118,9 @@ export default {
       }
     }
   },
+  components: {
+    Signup
+  },
   methods: {
     handleSubmit (name) {
       this.$refs[name].validate((valid) => {
@@ -133,7 +138,13 @@ export default {
         } else {
         }
       })
+    },
+    showSignup () {
+      this.showHandlerFlag = true
     }
+  },
+  showHandlerFlag: {
+      flag: false
   }
 }
 </script>
@@ -224,7 +235,6 @@ export default {
         background: #1da1f2;
         .text {
             width: 220px;
-            height: 100%;
             color: #ffff;
             padding: 14px 0;
             margin: 0 auto;
@@ -243,7 +253,6 @@ export default {
     }
     .right {
         width: 100%;
-        // height: 789px;
         margin: 0 auto;
         padding-top: 20px;
         .LoginHeader {
@@ -266,9 +275,11 @@ export default {
 @media only screen and (min-width: 992px) {
     .content {
         width: 100%;
-        height: 100%;
-        padding: 14px;
+        height: 95vh;
         .form {
+            position: relative;
+            top: 45%; /*偏移*/
+            transform: translateY(-50%);
             .tips {
                 width: 100%;
                 margin: 48px 0  16px 0;
@@ -284,13 +295,12 @@ export default {
     .left {
         width: 100%;
         height: 100vh;
-        background: #1da1f2;
         .text {
-            width: 220px;
-            height: 100%;
             color: #ffff;
-            padding: 14px 0;
             margin: 0 auto;
+            position: relative;
+            top: 50%; /*偏移*/
+            transform: translateY(-50%);
             .item {
                 width: 100%;
                 display: block;
@@ -306,7 +316,7 @@ export default {
     }
     .right {
         width: 100%;
-        // height: 789px;
+        height: 5vh;
         padding-top: 20px;
         .LoginHeader {
             display: block;
@@ -320,7 +330,6 @@ export default {
         text-align: center;
         Button {
             width: 100%;
-            // margin-right: 15px;
         }
     }
 
@@ -329,7 +338,7 @@ export default {
 @media only screen and (min-width: 1200px) {
     .content {
         width: 100%;
-        height: 100%;
+        height: 95vh;
         padding: 14px;
         .form {
             .tips {
@@ -349,11 +358,12 @@ export default {
         height: 100vh;
         background: #1da1f2;
         .text {
-            width: 220px;
-            height: 100%;
             color: #ffff;
             padding: 14px 0;
             margin: 0 auto;
+            position: relative;
+            top: 50%; /*偏移*/
+            transform: translateY(-50%);
             .item {
                 width: 100%;
                 display: block;
@@ -369,6 +379,7 @@ export default {
     }
     .right {
         width: 100%;
+        height: 5vh;
         padding-top: 20px;
         .LoginHeader {
             display: block;
