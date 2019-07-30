@@ -1,6 +1,12 @@
 <template>
     <div class="content">
-      <Modal v-model="showHandlerFlag.flag" :closable="false" :mask-closable="false">
+      <Modal
+        v-model="showHandlerFlag"
+        :closable="handlerClosable"
+        :mask-closable="false"
+        class-name="vertical-center-modal"
+        @on-cancel="cancel"
+       >
         <div class="header">
           <h1>创建你的账号</h1>
         </div>
@@ -29,15 +35,11 @@
 </template>
 <script>
 export default {
-  name: 'Register',
-  props: {
-    showHandlerFlag: {
-      type: Object,
-      default: {}
-    }
-  },
+  name: 'Signup',
+  props: ['showHandlerFlag', 'handlerClosable'],
   data () {
     return {
+      handlerModal: this.showHandlerFlag,
       formInline: {
         nickName: '',
         userName: '',
@@ -56,6 +58,19 @@ export default {
         ]
       }
     }
+  },
+  methods: {
+    cancel () {
+      this.$emit('updateModalStatus', false)
+    }
+  },
+  watch: {
+    'handlerModal': function (val) {
+      console.log('子组件监听： handlerModal ---' + val)
+    }
+  },
+  mounted () {
+    console.log('子组件 mounted --' + this.handlerModal)
   }
 }
 </script>
@@ -76,5 +91,14 @@ export default {
 }
 .footer {
   text-align: right;
+}
+.vertical-center-modal{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .ivu-modal{
+        top: 0;
+    }
 }
 </style>

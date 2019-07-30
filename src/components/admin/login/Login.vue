@@ -64,7 +64,7 @@
                 <Row>
                     <div class="btn-group">
                         <Col :xs="{span:10,offset:1}" :md="{span:6,offset:6}" :lg="12" :xl="12" >
-                            <Button type="primary" shape="circle"  @click="showSignup()">注册</Button>
+                            <Button type="primary" shape="circle"  @click="showSignup">注册</Button>
                         </Col>
                         <Col :xs="{span:10,offset:2}" :md="{span:6,offset:1}" :lg="12" :xl="12">
                             <Button type="primary" ghost shape="circle" to='/signin'>登录</Button>
@@ -85,6 +85,7 @@
                     </div>
                 </div>
             </Col>
+            <Signup :showHandlerFlag="showHandlerFlag" :handlerClosable="flag" @updateModalStatus="updateModalStatus"></Signup>
         </Row>
         <!-- <Row>
             <Col>
@@ -93,16 +94,17 @@
                 </div>
             </Col>
         </Row> -->
-        <Signup :showHandlerFlag="showHandlerFlag"></Signup>
     </div>
 </template>
 <script>
 import axios from 'axios'
-import Signup from './Signin'
+import Signup from './Signup'
 export default {
-  name: 'login',
+  name: 'Login',
   data () {
     return {
+      flag: true,
+      showHandlerFlag: false,
       formInline: {
         userName: '',
         password: ''
@@ -140,11 +142,16 @@ export default {
       })
     },
     showSignup () {
-      this.showHandlerFlag = true
+      this.showHandlerFlag = !this.showHandlerFlag
+    },
+    updateModalStatus (modalStatus) {
+      console.log('父组件：' + modalStatus)
+      this.showHandlerFlag = modalStatus
     }
   },
-  showHandlerFlag: {
-      flag: false
+  created () {
+    //   this.showSignup();
+    // console.log('父组件 mounted --' + this.showHandlerFlag)
   }
 }
 </script>
