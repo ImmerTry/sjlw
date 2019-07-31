@@ -1,14 +1,119 @@
+<template>
+    <div class="layout">
+        <Layout>
+            <Sider ref="side1" hide-trigger collapsible :collapsed-width="78" v-model="isCollapsed">
+                <div class="logo">
+                    <span>Logo</span>
+                </div>
+                <Menu active-name="1-2" theme="dark" width="auto" :class="menuitemClasses">
+                    <MenuItem name="1-1">
+                        <Icon type="ios-navigate"></Icon>
+                        <span>图片</span>
+                    </MenuItem>
+                    <MenuItem name="1-2">
+                        <Icon type="ios-search"></Icon>
+                        <span>管理</span>
+                    </MenuItem>
+                    <MenuItem name="1-3">
+                        <Icon type="ios-settings"></Icon>
+                        <span>设置</span>
+                    </MenuItem>
+                </Menu>
+            </Sider>
+            <Layout>
+                <Header :style="{padding: 0}" class="layout-header-bar">
+                    <div class="layout-header-icon">
+                        <Icon @click.native="collapsedSider" :class="rotateIcon" :style="{margin: '0 20px'}" type="md-menu" size="24"></Icon>
+                    </div>
+                    <div class="layout-header-breadcrumb">
+                        <Breadcrumb>
+                            <BreadcrumbItem to="/">
+                                <Icon type="ios-home-outline"></Icon> Home
+                            </BreadcrumbItem>
+                            <BreadcrumbItem to="/components/breadcrumb">
+                                <Icon type="logo-buffer"></Icon> Components
+                            </BreadcrumbItem>
+                            <BreadcrumbItem>
+                                <Icon type="ios-cafe"></Icon> Breadcrumb
+                            </BreadcrumbItem>
+                        </Breadcrumb>
+                    </div>
+                    <div class="layout-header-avatar">
+                        <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
+                    </div>
+                </Header>
+                <!-- <Content :style="{margin: '20px', background: '#fff', minHeight: '260px'}">
+                    Content
+                </Content> -->
+            </Layout>
+        </Layout>
+    </div>
+</template>
+<script>
+export default {
+  data () {
+    return {
+      isCollapsed: false
+    }
+  },
+  computed: {
+    rotateIcon () {
+      return [
+        'menu-icon',
+        this.isCollapsed ? 'rotate-icon' : ''
+      ]
+    },
+    menuitemClasses () {
+      return [
+        'menu-item',
+        this.isCollapsed ? 'collapsed-menu' : ''
+      ]
+    }
+  },
+  methods: {
+    collapsedSider () {
+      this.$refs.side1.toggleCollapse()
+    }
+  }
+}
+</script>
 <style scoped>
+    body,html {
+        margin: 0;
+        padding: 0;
+    }
     .layout{
-        border: 1px solid #d7dde4;
+        width: 100%;
+        height: 100vh;
         background: #f5f7f9;
         position: relative;
-        border-radius: 4px;
         overflow: hidden;
     }
+    .logo {
+        width: 100%;
+        height: 64px;
+        font-size: 24px;
+        color: #ffffff;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     .layout-header-bar{
+        width: 100%;
         background: #fff;
         box-shadow: 0 1px 1px rgba(0,0,0,.1);
+        /* float: left; */
+        /* border:1px solid red; */
+    }
+    .layout-header-icon {
+        width: 10%;
+        float:left;
+    }
+    .layout-header-breadcrumb {
+        width: 80%;
+        float: left;
+        /* border:1px solid green; */
     }
     .layout-logo-left{
         width: 90%;
@@ -49,61 +154,3 @@
         font-size: 22px;
     }
 </style>
-<template>
-    <div class="layout">
-        <Layout>
-            <Sider ref="side1" hide-trigger collapsible :collapsed-width="78" v-model="isCollapsed">
-                <Menu active-name="1-2" theme="dark" width="auto" :class="menuitemClasses">
-                    <MenuItem name="1-1">
-                        <Icon type="ios-navigate"></Icon>
-                        <span>Option 1</span>
-                    </MenuItem>
-                    <MenuItem name="1-2">
-                        <Icon type="ios-search"></Icon>
-                        <span>Option 2</span>
-                    </MenuItem>
-                    <MenuItem name="1-3">
-                        <Icon type="ios-settings"></Icon>
-                        <span>Option 3</span>
-                    </MenuItem>
-                </Menu>
-            </Sider>
-            <Layout>
-                <Header :style="{padding: 0}" class="layout-header-bar">
-                    <Icon @click.native="collapsedSider" :class="rotateIcon" :style="{margin: '0 20px'}" type="md-menu" size="24"></Icon>
-                </Header>
-                <Content :style="{margin: '20px', background: '#fff', minHeight: '260px'}">
-                    Content
-                </Content>
-            </Layout>
-        </Layout>
-    </div>
-</template>
-<script>
-    export default {
-        data () {
-            return {
-                isCollapsed: false
-            }
-        },
-        computed: {
-            rotateIcon () {
-                return [
-                    'menu-icon',
-                    this.isCollapsed ? 'rotate-icon' : ''
-                ];
-            },
-            menuitemClasses () {
-                return [
-                    'menu-item',
-                    this.isCollapsed ? 'collapsed-menu' : ''
-                ]
-            }
-        },
-        methods: {
-            collapsedSider () {
-                this.$refs.side1.toggleCollapse();
-            }
-        }
-    }
-</script>

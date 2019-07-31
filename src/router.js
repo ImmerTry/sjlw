@@ -52,6 +52,11 @@ export default new Router({
       path: '/signup',
       name: 'signup',
       component: () => import('./components/admin/login/Signup.vue')
+    },
+    {
+      path: '/index',
+      name: 'index',
+      component: () => import('./components/admin/Index.vue')
     }
   ]
 })
