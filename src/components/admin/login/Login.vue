@@ -10,7 +10,7 @@
                                     <span class="Icon"></span>
                                 </div>
                                 <h1 class="tips">后台登录</h1>
-                                <Button class="register" type="primary" shape="circle" long @click="showSignup()">注册</Button>
+                                <Button class="register" type="primary" shape="circle" long @click="showSignup">注册</Button>
                                 <br><br>
                                 <Button class="LoginBtn" type="primary" ghost shape="circle" long to='/signin'>登录</Button>
                             </div>
@@ -67,7 +67,7 @@
                             <Button type="primary" shape="circle"  @click="showSignup">注册</Button>
                         </Col>
                         <Col :xs="{span:10,offset:2}" :md="{span:6,offset:1}" :lg="12" :xl="12">
-                            <Button type="primary" ghost shape="circle" to='/signin'>登录</Button>
+                            <Button type="primary" ghost shape="circle" long to='/signin'>登录</Button>
                         </Col>
                     </div>
                 </Row>
@@ -79,7 +79,7 @@
                             <span class="Icon"></span>
                         </div>
                         <h1 class="tips">后台登录</h1>
-                        <Button class="register" type="primary" shape="circle" long  @click="showSignup()">注册</Button>
+                        <Button class="register" type="primary" shape="circle" long  @click="showSignup">注册</Button>
                         <br><br>
                         <Button class="LoginBtn" type="primary" ghost shape="circle" long to='/signin'>登录</Button>
                     </div>
@@ -145,7 +145,7 @@ export default {
       this.showHandlerFlag = !this.showHandlerFlag
     },
     updateModalStatus (modalStatus) {
-      console.log('父组件：' + modalStatus)
+    //   console.log('父组件：' + modalStatus)
       this.showHandlerFlag = modalStatus
     }
   },
@@ -331,8 +331,7 @@ export default {
     }
     .btn-group {
         width: 100%;
-        height: 100
-        px;
+        height: 100px;
         padding: 39px 15px 30px 15px;
         text-align: center;
         Button {

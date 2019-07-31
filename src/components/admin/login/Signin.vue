@@ -23,8 +23,8 @@
                     </Form>
                     <div class="footer">
                         <router-link to=''>忘记密码? </router-link>
-                        <router-link to=''>还没有账号?注册</router-link>
-                    </div>
+                        <router-link to='/signup?flag=true'>还没有账号?注册</router-link>
+                    </div><!-- :to="{path:'/signup',query: {flag: true}}" -->
                 </div>
             </Col>
         </Row>
@@ -41,11 +41,11 @@ export default {
       },
       ruleInline: {
         user: [
-          { required: true, message: 'Please fill in the user name', trigger: 'blur' }
+          { required: true, message: '请输入登录名', trigger: 'blur' }
         ],
         password: [
-          { required: true, message: 'Please fill in the password.', trigger: 'blur' },
-          { type: 'string', min: 6, message: 'The password length cannot be less than 6 bits', trigger: 'blur' }
+          { required: true, message: '请输入密码', trigger: 'blur' },
+          { type: 'string', min: 6, message: '密码长度至少六位', trigger: 'blur' }
         ]
       }
     }
@@ -60,6 +60,9 @@ export default {
         }
       })
     }
+  },
+  created () {
+    //   console.log('route :', this.$route)
   }
 }
 </script>
