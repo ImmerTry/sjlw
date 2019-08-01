@@ -22,39 +22,61 @@
             </Sider>
             <Layout>
                 <Header :style="{padding: 0}" class="layout-header-bar">
-                    <div class="layout-header-icon">
-                        <Icon @click.native="collapsedSider" :class="rotateIcon" :style="{margin: '0 20px'}" type="md-menu" size="24"></Icon>
+                    <div class="layout-header-left">
+                        <div class="layout-header-icon">
+                            <Icon @click.native="collapsedSider" :class="rotateIcon" :style="{margin: '0 20px'}" type="md-menu" size="24"></Icon>
+                        </div>
+                        <div class="layout-header-breadcrumb">
+                            <Breadcrumb>
+                                <BreadcrumbItem to="/">
+                                    <Icon type="ios-home-outline"></Icon> Home
+                                </BreadcrumbItem>
+                                <BreadcrumbItem to="/components/breadcrumb">
+                                    <Icon type="logo-buffer"></Icon> Components
+                                </BreadcrumbItem>
+                                <BreadcrumbItem>
+                                    <Icon type="ios-cafe"></Icon> Breadcrumb
+                                </BreadcrumbItem>
+                            </Breadcrumb>
+                        </div>
                     </div>
-                    <div class="layout-header-breadcrumb">
-                        <Breadcrumb>
-                            <BreadcrumbItem to="/">
-                                <Icon type="ios-home-outline"></Icon> Home
-                            </BreadcrumbItem>
-                            <BreadcrumbItem to="/components/breadcrumb">
-                                <Icon type="logo-buffer"></Icon> Components
-                            </BreadcrumbItem>
-                            <BreadcrumbItem>
-                                <Icon type="ios-cafe"></Icon> Breadcrumb
-                            </BreadcrumbItem>
-                        </Breadcrumb>
-                    </div>
-                    <div class="layout-header-avatar">
-                        <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
+                    <div class="layout-header-right">
+                        <div class="layout-header-dropdown">
+                            <Dropdown>
+                                <a href="javascript:void(0)">
+                                    <Icon type="md-arrow-dropdown" />
+                                </a>
+                                <DropdownMenu slot="list">
+                                    <DropdownItem>个人中心</DropdownItem>
+                                    <DropdownItem>退出登录</DropdownItem>
+                                </DropdownMenu>
+                            </Dropdown>
+                        </div>
+                        <div class="layout-header-avatar">
+                            <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
+                        </div>
                     </div>
                 </Header>
-                <!-- <Content :style="{margin: '20px', background: '#fff', minHeight: '260px'}">
-                    Content
-                </Content> -->
+                <TagsNav :value="value"></TagsNav>
+                <Content :style="{margin: '20px', background: '#fff', minHeight: '100vh'}">
+                </Content>
             </Layout>
         </Layout>
     </div>
 </template>
 <script>
+import TagsNav from './tags/tags-nav'
+
 export default {
   data () {
     return {
-      isCollapsed: false
+      isCollapsed: false,
+      visible: false,
+      value: 'aa'
     }
+  },
+  components: {
+    TagsNav
   },
   computed: {
     rotateIcon () {
@@ -77,11 +99,7 @@ export default {
   }
 }
 </script>
-<style scoped>
-    body,html {
-        margin: 0;
-        padding: 0;
-    }
+<style lang="less" scoped>
     .layout{
         width: 100%;
         height: 100vh;
@@ -103,17 +121,42 @@ export default {
         width: 100%;
         background: #fff;
         box-shadow: 0 1px 1px rgba(0,0,0,.1);
-        /* float: left; */
-        /* border:1px solid red; */
+    }
+    .layout-header-left {
+        width: 80%;
+        height: 64px;
+        float: left;
     }
     .layout-header-icon {
-        width: 10%;
-        float:left;
+        width: 40px;
+        height: 40px;
+        line-height: 64px;
+        float: left;
+        display: block;
     }
     .layout-header-breadcrumb {
-        width: 80%;
+        width: 75%;
         float: left;
-        /* border:1px solid green; */
+        margin-left: 30px;
+    }
+    .layout-header-right {
+        width: 20%;
+        height: 64px;
+        float: right;
+        padding: 0 20px;
+        .layout-header-avatar {
+           width: 40px;
+           float: right;
+           text-align: right;
+        }
+        .layout-header-dropdown {
+            width: 20px;
+            height: 64px;
+            float: right;
+            a {
+                color: #000;
+            }
+        }
     }
     .layout-logo-left{
         width: 90%;
