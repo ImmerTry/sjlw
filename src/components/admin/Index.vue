@@ -57,8 +57,11 @@
                         </div>
                     </div>
                 </Header>
-                <TagsNav :value="value"></TagsNav>
-                <Content :style="{margin: '20px', background: '#fff', minHeight: '100vh'}">
+                <div class="tag-nav-wrapper">
+                    <TagsNav :value="value"></TagsNav>
+                </div>
+                <Content :style="{padding: '18px', background: '#fff', minHeight: '100vh'}">
+                    <Home></Home>
                 </Content>
             </Layout>
         </Layout>
@@ -66,6 +69,7 @@
 </template>
 <script>
 import TagsNav from './tags/tags-nav'
+import Home from './home/Home'
 
 export default {
   data () {
@@ -76,7 +80,8 @@ export default {
     }
   },
   components: {
-    TagsNav
+    TagsNav,
+    Home
   },
   computed: {
     rotateIcon () {
@@ -157,6 +162,10 @@ export default {
                 color: #000;
             }
         }
+    }
+    .tag-nav-wrapper {
+        width: 100%;
+        height: 40px;
     }
     .layout-logo-left{
         width: 90%;

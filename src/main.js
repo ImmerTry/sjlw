@@ -10,11 +10,14 @@ import '@/assets/styles/reset.css'
 import 'iview/dist/styles/iview.css'
 import '@/assets/styles/iconfont.css'
 import Axios from 'axios'
+import echarts from 'echarts'
 
 // axios全局配置
 Vue.prototype.$axios = Axios
 Axios.defaults.baseURL = '/api'
 Axios.defaults.headers.post['Content-Type'] = 'application/json'
+// echarts 全局配置
+Vue.prototype.$echarts = echarts
 
 Vue.config.productionTip = false
 
