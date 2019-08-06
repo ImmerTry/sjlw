@@ -134,7 +134,7 @@ export default {
           }).then(response => {
             const data = response.data
             if (data.code === 200) {
-              this.$Message.success('登录成功')
+              this.$router.push({ path: '/index' })
             }
           })
         } else {

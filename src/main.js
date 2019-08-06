@@ -11,6 +11,9 @@ import 'iview/dist/styles/iview.css'
 import '@/assets/styles/iconfont.css'
 import Axios from 'axios'
 import echarts from 'echarts'
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
 
 // axios全局配置
 Vue.prototype.$axios = Axios
