@@ -41,7 +41,7 @@ export default {
       //   }
       // },
       grid: {
-        left: '2%',
+        left: '3%',
         right: '4%',
         bottom: '3%',
         containLabel: true

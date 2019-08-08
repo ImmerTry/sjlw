@@ -27,8 +27,7 @@
     </div>
     <div class="scroll-outer">
       <div class="scroll-body">
-        <Tag type="dot">首页</Tag>
-         <Tag color="primary" type="dot" closable>图片管理</Tag>
+        <Tag color="primary" type="dot">首页</Tag>
       </div>
     </div>
     <!-- <Tabs type="card" closable @on-tab-remove="handleTabRemove">

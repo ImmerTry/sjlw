@@ -12,17 +12,37 @@
                     <span>Logo</span>
                 </div>
                 <Menu active-name="1-2" theme="dark" width="auto" :class="menuitemClasses">
-                    <MenuItem name="1-1">
-                        <Icon type="ios-navigate"></Icon>
-                        <span>图片</span>
+                    <MenuItem name="home">
+                        <Icon type="ios-home-outline"/>
+                        <span>首页</span>
                     </MenuItem>
-                    <MenuItem name="1-2">
-                        <Icon type="ios-search"></Icon>
-                        <span>管理</span>
+                    <MenuItem name="issue">
+                        <Icon type="ios-create-outline"/>
+                        <span>发布文章</span>
                     </MenuItem>
-                    <MenuItem name="1-3">
-                        <Icon type="ios-settings"></Icon>
-                        <span>设置</span>
+                    <MenuItem name="articleManage">
+                        <Icon type="ios-list-box-outline"/>
+                        <span>文章管理</span>
+                    </MenuItem>
+                    <MenuItem name="commentManage">
+                        <Icon type="ios-paper-outline"/>
+                        <span>评论管理</span>
+                    </MenuItem>
+                    <MenuItem name="messageManage">
+                        <Icon type="ios-chatboxes-outline"/>
+                        <span>留言管理</span>
+                    </MenuItem>
+                    <MenuItem name="label">
+                        <Icon type="ios-pricetag-outline"/>
+                        <span>分类/标签</span>
+                    </MenuItem>
+                    <MenuItem name="info">
+                        <Icon type="ios-person-outline"/>
+                        <span>个人信息</span>
+                    </MenuItem>
+                    <MenuItem name="setting">
+                        <Icon type="ios-settings-outline"/>
+                        <span>系统设置</span>
                     </MenuItem>
                 </Menu>
             </Sider>
@@ -36,12 +56,6 @@
                         <Breadcrumb>
                             <BreadcrumbItem to="/">
                                 <Icon type="ios-home-outline"></Icon> Home
-                            </BreadcrumbItem>
-                            <BreadcrumbItem to="/components/breadcrumb">
-                                <Icon type="logo-buffer"></Icon> Components
-                            </BreadcrumbItem>
-                            <BreadcrumbItem>
-                                <Icon type="ios-cafe"></Icon> Breadcrumb
                             </BreadcrumbItem>
                         </Breadcrumb>
                     </div>
@@ -183,7 +197,7 @@ export default {
     .tag-nav-wrapper {
         width: 100%;
         height: 40px;
-        z-index: 10;
+        z-index: 9;
     }
     .main-content-con{
         height: calc(~"100vh - 64px");

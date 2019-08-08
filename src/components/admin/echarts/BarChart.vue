@@ -60,7 +60,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .barChart {
-  width: 100%;
+  max-width: 100%;
   height: 300px;
 }
 </style>
