@@ -114,7 +114,6 @@ export default {
       padding: 6px 4px;
       line-height: 14px;
       text-align: center;
-      // border:1px solid red;
     }
     &.left-btn{
       left: 0px;

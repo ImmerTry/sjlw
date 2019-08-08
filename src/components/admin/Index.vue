@@ -1,7 +1,13 @@
 <template>
     <div class="layout">
-        <Layout>
-            <Sider ref="side1" hide-trigger collapsible :collapsed-width="78" v-model="isCollapsed">
+       <Layout>
+        <Sider
+            class="layout-sider"
+            ref="side"
+            hide-trigger
+            collapsible
+            :collapsed-width="78"
+            v-model="isCollapsed">
                 <div class="logo">
                     <span>Logo</span>
                 </div>
@@ -20,49 +26,53 @@
                     </MenuItem>
                 </Menu>
             </Sider>
-            <Layout>
-                <Header :style="{padding: 0}" class="layout-header-bar">
-                    <div class="layout-header-left">
-                        <div class="layout-header-icon">
-                            <Icon @click.native="collapsedSider" :class="rotateIcon" :style="{margin: '0 20px'}" type="md-menu" size="24"></Icon>
-                        </div>
-                        <div class="layout-header-breadcrumb">
-                            <Breadcrumb>
-                                <BreadcrumbItem to="/">
-                                    <Icon type="ios-home-outline"></Icon> Home
-                                </BreadcrumbItem>
-                                <BreadcrumbItem to="/components/breadcrumb">
-                                    <Icon type="logo-buffer"></Icon> Components
-                                </BreadcrumbItem>
-                                <BreadcrumbItem>
-                                    <Icon type="ios-cafe"></Icon> Breadcrumb
-                                </BreadcrumbItem>
-                            </Breadcrumb>
-                        </div>
+        <Layout>
+            <Header class="layout-header-bar">
+                <div class="layout-header-left">
+                    <div class="layout-header-icon">
+                        <Icon @click.native="collapsedSider" :class="rotateIcon"  type="md-menu"></Icon>
                     </div>
-                    <div class="layout-header-right">
-                        <div class="layout-header-dropdown">
-                            <Dropdown>
-                                <a href="javascript:void(0)">
-                                    <Icon type="md-arrow-dropdown" />
-                                </a>
-                                <DropdownMenu slot="list">
-                                    <DropdownItem>个人中心</DropdownItem>
-                                    <DropdownItem>退出登录</DropdownItem>
-                                </DropdownMenu>
-                            </Dropdown>
-                        </div>
-                        <div class="layout-header-avatar">
-                            <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
-                        </div>
+                    <div class="layout-header-breadcrumb">
+                        <Breadcrumb>
+                            <BreadcrumbItem to="/">
+                                <Icon type="ios-home-outline"></Icon> Home
+                            </BreadcrumbItem>
+                            <BreadcrumbItem to="/components/breadcrumb">
+                                <Icon type="logo-buffer"></Icon> Components
+                            </BreadcrumbItem>
+                            <BreadcrumbItem>
+                                <Icon type="ios-cafe"></Icon> Breadcrumb
+                            </BreadcrumbItem>
+                        </Breadcrumb>
                     </div>
-                </Header>
-                <div class="tag-nav-wrapper">
-                    <TagsNav :value="value"></TagsNav>
                 </div>
-                <Content :style="{padding: '18px', background: '#fff', minHeight: '100vh'}">
-                    <Home></Home>
-                </Content>
+                <div class="layout-header-right">
+                    <div class="layout-header-dropdown">
+                        <Dropdown>
+                            <a href="javascript:void(0)">
+                                <Icon type="md-arrow-dropdown" />
+                            </a>
+                            <DropdownMenu slot="list">
+                                <DropdownItem>个人中心</DropdownItem>
+                                <DropdownItem>退出登录</DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
+                    </div>
+                    <div class="layout-header-avatar">
+                        <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
+                    </div>
+                </div>
+            </Header>
+            <Content class="main-content-con">
+                <Layout class="main-layout-con">
+                    <div class="tag-nav-wrapper">
+                        <TagsNav :value="value"></TagsNav>
+                    </div>
+                    <Content class="content-wrapper">
+                        <Home></Home>
+                    </Content>
+                </Layout>
+            </Content>
             </Layout>
         </Layout>
     </div>
@@ -99,7 +109,7 @@ export default {
   },
   methods: {
     collapsedSider () {
-      this.$refs.side1.toggleCollapse()
+      this.$refs.side.toggleCollapse()
     }
   }
 }
@@ -107,10 +117,15 @@ export default {
 <style lang="less" scoped>
     .layout{
         width: 100%;
-        height: 100vh;
+        height: 100%;
         background: #f5f7f9;
         position: relative;
         overflow: hidden;
+    }
+    .layout-sider {
+        height: 100vh;
+        overflow: auto;
+        left:0;
     }
     .logo {
         width: 100%;
@@ -123,32 +138,34 @@ export default {
         align-items: center;
     }
     .layout-header-bar{
-        width: 100%;
+        height: 64px;
         background: #fff;
         box-shadow: 0 1px 1px rgba(0,0,0,.1);
+        padding:0 20px;
+        z-index: 10;
     }
     .layout-header-left {
-        width: 80%;
-        height: 64px;
-        float: left;
+        position: absolute;
     }
     .layout-header-icon {
-        width: 40px;
-        height: 40px;
+        width: 24px;
+        height: 64px;
         line-height: 64px;
         float: left;
         display: block;
+        font-size: 24px;
     }
     .layout-header-breadcrumb {
-        width: 75%;
-        float: left;
         margin-left: 30px;
+        float: left;
     }
     .layout-header-right {
-        width: 20%;
+        position: absolute;
+        right: 0;
+        top: 0;
         height: 64px;
-        float: right;
         padding: 0 20px;
+        position: absolute;
         .layout-header-avatar {
            width: 40px;
            float: right;
@@ -166,13 +183,21 @@ export default {
     .tag-nav-wrapper {
         width: 100%;
         height: 40px;
+        z-index: 10;
     }
-    .layout-logo-left{
-        width: 90%;
-        height: 30px;
-        background: #5b6270;
-        border-radius: 3px;
-        margin: 15px auto;
+    .main-content-con{
+        height: calc(~"100vh - 64px");
+        overflow: hidden;
+    }
+    .tag-nav-wrapper{
+        padding: 0;
+        height:40px;
+        background:#F0F0F0;
+    }
+    .content-wrapper{
+        padding: 18px;
+        height: calc(~"100vh -  104px");
+        overflow: auto;
     }
     .menu-icon{
         transition: all .3s;

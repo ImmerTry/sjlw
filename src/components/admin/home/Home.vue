@@ -68,9 +68,13 @@
             </Card>
         </Col>
     </Row>
-    <Card>
-        <Stacked></Stacked>
-    </Card>
+    <Row>
+        <Col :md="{span:22,offset:1}" :lg="{span:22,offset:1}" :xl="{span:22,offset:1}">
+            <Card :padding="0">
+                <Stacked></Stacked>
+            </Card>
+        </Col>
+    </Row>
     </div>
 </template>
 <script>
