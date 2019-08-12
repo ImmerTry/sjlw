@@ -136,7 +136,11 @@ export default {
             if (data.code === 200) {
               this.$Message.success('登录成功')
               this.$router.push({ path: '/index' })
+            } else {
+              this.$Message.error(data.msg)
             }
+          }).catch(error => {
+            this.$Message.error('路径请求有误')
           })
         } else {
         }
