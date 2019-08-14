@@ -1,24 +1,61 @@
 import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
+import App from '@/App.vue'
+import router from '@/router'
+import store from '@/store'
 import fastClick from 'fastclick'
 import iView from 'iview'
 import VueAMap from 'vue-amap'
-import '@/assets/styles/border.css'
-import '@/assets/styles/reset.css'
+import 'styles/border.css'
+import 'styles/reset.css'
 import 'iview/dist/styles/iview.css'
-import '@/assets/styles/iconfont.css'
+import 'styles/iconfont.css'
 import Axios from 'axios'
 import echarts from 'echarts'
 import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-// axios全局配置
-Vue.prototype.$axios = Axios
+// 设置axios为form-data
 Axios.defaults.baseURL = '/api'
-Axios.defaults.headers.post['Content-Type'] = 'application/json'
+Axios.defaults.headers.common['Authentication'] = store.state.token
+Axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
+Axios.defaults.headers.get['Content-Type'] = 'application/x-www-form-urlencoded'
+Axios.defaults.transformRequest = [function (data) {
+  let ret = ''
+  for (let it in data) {
+    ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+  }
+  return ret
+}]
+// 添加请求拦截器
+Axios.interceptors.request.use(config => {
+  if (store.state.token) {
+    config.headers.common['Authentication'] = store.state.token
+  }
+  return config
+},
+error => {
+  return Promise.reject(error)
+})
+// 响应拦截器
+Axios.interceptors.response.use(response => {
+  return response
+},
+error => {
+  if (error.response) {
+    switch (error.response.status) {
+      case 401:
+        this.$store.commit('delToken')
+        router.replace({
+          path: '/login',
+          query: { redirect: router.currentRoute.fullPath } // 登录成功后跳转浏览的当前页面
+        })
+    }
+    return Promise.reject(error.response.data)
+  }
+})
+// 修改原型链
+Vue.prototype.$axios = Axios
 // echarts 全局配置
 Vue.prototype.$echarts = echarts
 

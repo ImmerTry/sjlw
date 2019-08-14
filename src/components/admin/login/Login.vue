@@ -135,7 +135,14 @@ export default {
             const data = response.data
             if (data.code === 200) {
               this.$Message.success('登录成功')
-              this.$router.push({ path: '/index' })
+              console.log(data)
+              this.$store.commit('setToken', 'Authentication')
+              if (store.state.token) {
+                this.$router.push('/')
+                console.log(store.state.token)
+              } else {
+                this.$router.replace('/login')
+              }
             } else {
               this.$Message.error(data.msg)
             }

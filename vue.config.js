@@ -1,4 +1,16 @@
+// 配置路径别名
+const path = require('path')
+
+const resolve = dir => {
+  return path.join(__dirname, dir)
+}
 module.exports = {
+  lintOnSave: false,
+  chainWebpack: config => {
+    config.resolve.alias
+      .set('@', resolve('src'))
+      .set('styles', resolve('src/assets/styles'))
+  },
   publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
   devServer: {
     port: 8383, // 端口号
