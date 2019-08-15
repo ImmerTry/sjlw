@@ -123,6 +123,7 @@ export default {
   components: {
     Signup
   },
+  
   methods: {
     handleSubmit (name) {
       this.$refs[name].validate((valid) => {
@@ -135,11 +136,11 @@ export default {
             const data = response.data
             if (data.code === 200) {
               this.$Message.success('登录成功')
-              console.log(data)
-              this.$store.commit('setToken', 'Authentication')
-              if (store.state.token) {
-                this.$router.push('/')
-                console.log(store.state.token)
+              const token = data.data
+              this.$store.commit('setToken', token)
+              if (this.$store.state.token) {
+                this.$router.push('/index')
+                console.log(this.$store.state.token)
               } else {
                 this.$router.replace('/login')
               }
@@ -147,6 +148,7 @@ export default {
               this.$Message.error(data.msg)
             }
           }).catch(error => {
+            console.log(error)
             this.$Message.error('路径请求有误')
           })
         } else {
