@@ -14,7 +14,7 @@ import echarts from 'echarts'
 import Vuex from 'vuex'
 
 Vue.use(Vuex)
-
+Vue.prototype.$store = store
 // 设置axios为form-data
 Axios.defaults.baseURL = '/api'
 Axios.defaults.headers.common['Authentication'] = store.state.token

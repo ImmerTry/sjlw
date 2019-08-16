@@ -99,6 +99,7 @@
 <script>
 import axios from 'axios'
 import Signup from './Signup'
+import store  from '@/store'
 export default {
   name: 'Login',
   data () {
@@ -137,10 +138,9 @@ export default {
             if (data.code === 200) {
               this.$Message.success('登录成功')
               const token = data.data
-              this.$store.commit('setToken', token)
-              if (this.$store.state.token) {
+              store.commit('setToken', token)
+              if (store.state.token) {
                 this.$router.push('/index')
-                console.log(this.$store.state.token)
               } else {
                 this.$router.replace('/login')
               }

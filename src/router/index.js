@@ -15,7 +15,7 @@ const router = new Router({
 })
 // 导航守卫
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(r => r.meta.requiredAuth)) {
+  if (to.matched.some(r => r.meta.requiresAuth)) {
     if (store.state.token) {
       next()
     } else {

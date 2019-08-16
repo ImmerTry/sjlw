@@ -48,6 +48,9 @@ export default [
   {
     path: '/index',
     name: 'index',
-    component: () => import('@/components/admin/Index.vue')
+    component: () => import('@/components/admin/Index.vue'),
+    meta: {
+      requiresAuth: true
+    }
   }
 ]
