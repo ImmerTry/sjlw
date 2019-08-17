@@ -8,49 +8,54 @@ export default [
   {
     path: '/news',
     name: 'news',
-    component: () => import('@/components/news/News.vue')
+    component: () => import('_c/news/News.vue')
   },
   {
     path: '/demo',
     name: 'demo',
-    component: () => import('@/components/demo/Demo.vue')
+    component: () => import('_c/demo/Demo.vue')
   },
   {
     path: '/about',
     name: 'about',
-    component: () => import('@/components/about/About.vue')
+    component: () => import('_c/about/About.vue')
   },
   {
     path: '/contact',
     name: 'contact',
-    component: () => import('@/components/contact/Contact.vue')
+    component: () => import('_c/contact/Contact.vue')
   },
   {
     path: '/detail/:id',
     name: 'detail',
-    component: () => import('@/components/news/Detail.vue')
+    component: () => import('_c/news/Detail.vue')
   },
   {
     path: '/login',
     name: 'login',
-    component: () => import('@/components/admin/login/Login.vue')
+    component: () => import('_c/admin/login/Login.vue')
   },
   {
     path: '/signin',
     name: 'signin',
-    component: () => import('@/components/admin/login/Signin.vue')
+    component: () => import('_c/admin/login/Signin.vue')
   },
   {
     path: '/signup',
     name: 'signup',
-    component: () => import('@/components/admin/login/Signup.vue')
+    component: () => import('_c/admin/login/Signup.vue')
   },
   {
     path: '/index',
     name: 'index',
-    component: () => import('@/components/admin/Index.vue'),
+    component: () => import('_c/admin/Index.vue'),
     meta: {
       requiresAuth: true
     }
+  },
+  {
+    path: '/issue',
+    name: 'issue',
+    component: () => import('_c/admin/issue/Comment.vue')
   }
 ]

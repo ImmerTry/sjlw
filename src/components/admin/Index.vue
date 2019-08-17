@@ -18,7 +18,7 @@
                     </MenuItem>
                     <MenuItem name="issue">
                         <Icon type="ios-create-outline"/>
-                        <span>发布文章</span>
+                        <router-link to='issue'>发布文章</router-link>
                     </MenuItem>
                     <MenuItem name="articleManage">
                         <Icon type="ios-list-box-outline"/>

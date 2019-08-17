@@ -10,6 +10,7 @@ module.exports = {
     config.resolve.alias
       .set('@', resolve('src'))
       .set('styles', resolve('src/assets/styles'))
+      .set('_c', resolve('src//components'))
   },
   publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
   devServer: {
