@@ -24,7 +24,7 @@
 </template>
 
 <script>
-  import {getUserInfo} from '@/api/user'
+  // import {getUserInfo} from '@/api/user'
 
   export default {
     name: 'modify',

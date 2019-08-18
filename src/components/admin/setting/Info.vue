@@ -45,14 +45,14 @@
 </template>
 
 <script>
-  import upload from '_c/upload'
-  import {editAvatarUrl} from "@/api/user";
+  // import upload from '_c/upload'
+  // import {editAvatarUrl} from "@/api/user";
   import Message from 'iview'
 
   export default {
     name: 'info',
     components: {
-      upload
+      // upload
     },
     data() {
       return {

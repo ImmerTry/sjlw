@@ -1,3 +1,4 @@
+import Main from '_c/admin/Index'
 
 export default [
   {
@@ -33,6 +34,9 @@ export default [
   {
     path: '/login',
     name: 'login',
+    meta: {
+      title: '登录'
+    },
     component: () => import('_c/admin/login/Login.vue')
   },
   {
@@ -46,16 +50,74 @@ export default [
     component: () => import('_c/admin/login/Signup.vue')
   },
   {
+    // 首页
     path: '/index',
-    name: 'index',
-    component: () => import('_c/admin/Index.vue'),
     meta: {
       requiresAuth: true
-    }
+    },
+    component: Main,
+    children: [
+      { // 发布文章
+        path: '/index',
+        name: 'index',
+        component: () => import('_c/admin/home/Home.vue')
+      }
+    ]
   },
   {
     path: '/issue',
     name: 'issue',
-    component: () => import('_c/admin/issue/Comment.vue')
+    component: Main,
+    children: [
+      { // 发布文章
+        path: '/article',
+        name: 'article',
+        component: () => import('_c/admin/issue/Issue.vue')
+      }
+    ]
+  },
+  {
+    path: '/manage',
+    name: 'manage',
+    component: Main,
+    children: [
+      { // 文章管理
+        path: '/articleManage',
+        name: 'articleManage',
+        component: () => import('_c/admin/manage/Article.vue')
+      },
+      { // 评论管理
+        path: '/comment',
+        name: 'comment',
+        component: () => import('_c/admin/manage/Comment.vue')
+      },
+      { // 留言管理
+        path: '/message',
+        name: 'messageManage',
+        component: () => import('_c/admin/manage/Message.vue')
+      },
+      { // 分类/标签
+        path: '/label',
+        name: 'label',
+        component: () => import('_c/admin/manage/Label.vue')
+      }
+    ]
+  },
+  {
+    path: '/setting',
+    name: 'setting',
+    component: Main,
+    children: [
+      { // 个人信息
+        path: '/info',
+        name: 'info',
+        component: () => import('_c/admin/setting/Info.vue')
+      },
+      { // 系统设置
+        path: '/setup',
+        name: 'setup',
+        component: () => import('_c/admin/setting/Setup.vue')
+      }
+    ]
   }
 ]

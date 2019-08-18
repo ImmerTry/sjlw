@@ -12,35 +12,35 @@
                     <span>Logo</span>
                 </div>
                 <Menu active-name="1-2" theme="dark" width="auto" :class="menuitemClasses">
-                    <MenuItem name="home">
+                    <MenuItem name="home" to='/index'>
                         <Icon type="ios-home-outline"/>
                         <span>首页</span>
                     </MenuItem>
-                    <MenuItem name="issue">
+                    <MenuItem name="issue" to='/article'>
                         <Icon type="ios-create-outline"/>
-                        <router-link to='issue'>发布文章</router-link>
+                        <span>发布文章</span>
                     </MenuItem>
-                    <MenuItem name="articleManage">
+                    <MenuItem name="articleManage" to='/articleManage'>
                         <Icon type="ios-list-box-outline"/>
                         <span>文章管理</span>
                     </MenuItem>
-                    <MenuItem name="commentManage">
+                    <MenuItem name="commentManage" to='/comment'>
                         <Icon type="ios-paper-outline"/>
                         <span>评论管理</span>
                     </MenuItem>
-                    <MenuItem name="messageManage">
+                    <MenuItem name="messageManage" to='/message'>
                         <Icon type="ios-chatboxes-outline"/>
                         <span>留言管理</span>
                     </MenuItem>
-                    <MenuItem name="label">
+                    <MenuItem name="label" to='/label'>
                         <Icon type="ios-pricetag-outline"/>
                         <span>分类/标签</span>
                     </MenuItem>
-                    <MenuItem name="info">
+                    <MenuItem name="info" to='info'>
                         <Icon type="ios-person-outline"/>
                         <span>个人信息</span>
                     </MenuItem>
-                    <MenuItem name="setting">
+                    <MenuItem name="setup" to='/setup'>
                         <Icon type="ios-settings-outline"/>
                         <span>系统设置</span>
                     </MenuItem>
@@ -83,7 +83,7 @@
                         <TagsNav :value="value"></TagsNav>
                     </div>
                     <Content class="content-wrapper">
-                        <Home></Home>
+                        <router-view/>
                     </Content>
                 </Layout>
             </Content>

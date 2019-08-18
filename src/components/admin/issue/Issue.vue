@@ -62,7 +62,7 @@
   import {Message} from 'iview'
 
   export default {
-    name: 'comment',
+    name: 'issue',
     data() {
       return {
         editorData: {

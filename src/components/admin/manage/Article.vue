@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Modal
+    <!-- <Modal
       v-model="showModal"
       :title="modal.title"
       :loading="loading"
@@ -56,18 +56,18 @@
               @changeSize="changeSize"
               @changeIndex="changeIndex"
       />
-    </Card>
+    </Card> -->
   </div>
 </template>
 
 <script>
-  import Tables from '_c/tables'
-  import {getTableData, insertTableData, deleteTableData, updateTableData} from '@/api/data'
-  import {formatDate} from '@/libs/tools'
+  // import Tables from '_c/tables'
+  // import {getTableData, insertTableData, deleteTableData, updateTableData} from '@/api/data'
+  // import {formatDate} from '@/libs/tools'
   import {Message} from 'iview'
 
   export default {
-    name: 'article-list',
+    name: 'article',
     components: {
       Tables
     },

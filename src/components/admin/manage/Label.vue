@@ -1,7 +1,7 @@
 <template>
   <div>
     <Card>
-      <tables ref="tables"
+      <!-- <tables ref="tables"
               editable searchable search-place="top"
               :columns="columns"
               v-model="tableData"
@@ -14,19 +14,19 @@
               @on-delete="handleDelete"
               @changeSize="changeSize"
               @changeIndex="changeIndex"
-      />
+      /> -->
     </Card>
   </div>
 </template>
 
 <script>
-  import Tables from '_c/tables'
-  import {getTableData} from '@/api/data'
+  // import Tables from '_c/tables'
+  // import {getTableData} from '@/api/data'
 
   export default {
-    name: 'classified',
+    name: 'label',
     components: {
-      Tables
+      // Tables
     },
 
   }
