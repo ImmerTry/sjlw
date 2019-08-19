@@ -119,5 +119,10 @@ export default [
         component: () => import('_c/admin/setting/Setup.vue')
       }
     ]
+  },
+  {
+    path: '/test',
+    name: 'test',
+    component: () => import('_c/admin/issue/demo.vue')
   }
 ]

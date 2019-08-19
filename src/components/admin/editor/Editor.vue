@@ -7,7 +7,7 @@
 <script>
   import Editor from 'wangeditor'
   import 'wangeditor/release/wangEditor.min.css'
-  // import {oneOf} from '@/libs/tools'
+  import {oneOf} from '@/libs/tools'
   import {Message} from 'iview'
 
   export default {
@@ -24,7 +24,7 @@
         type: String,
         default: 'html',
         validator: (val) => {
-          // return oneOf(val, ['html', 'text'])
+          return oneOf(val, ['html', 'text'])
         }
       },
       /**
@@ -77,7 +77,7 @@
       // 置服务器端地址
       this.editor.customConfig.uploadFileName = 'myFile'; //设置文件上传的参数名称
       // this.editor.customConfig.uploadImgServer = '/upload';
-      this.editor.customConfig.uploadImgServer = '//localhost:8080/upload';//设置上传文件的服务器路径
+      this.editor.customConfig.uploadImgServer = '//localhost:8088/upload';//设置上传文件的服务器路径
       // 将图片大小限制为 3M
       this.editor.customConfig.uploadImgMaxSize = 3 * 1024 * 1024;
       // 限制一次最多上传 5 张图片

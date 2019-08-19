@@ -11,7 +11,7 @@
                 <div class="logo">
                     <span>Logo</span>
                 </div>
-                <Menu active-name="1-2" theme="dark" width="auto" :class="menuitemClasses">
+                <Menu :active-name="activeName" :theme="theme" width="auto" :class="menuitemClasses">
                     <MenuItem name="home" to='/index'>
                         <Icon type="ios-home-outline"/>
                         <span>首页</span>
@@ -94,13 +94,15 @@
 <script>
 import TagsNav from './tags/tags-nav'
 import Home from './home/Home'
+import Side from './side/Menu'
 
 export default {
   data () {
     return {
       isCollapsed: false,
       visible: false,
-      value: 'aa'
+      theme: 'dark',
+      activeName: ''
     }
   },
   components: {

@@ -7,11 +7,26 @@
         :rules="ruleValidate"
         :label-width="80"
         @update="getLocalStorage">
-        <FormItem prop="title" label="文章标题">
-          <Input type="text" v-model="editorData.title" placeholder="文章标题"/>
-        </FormItem>
+        <Row class="rowClass">
+          <Col :xs="24" :md="24" :lg="8" :xl="{span:8}">
+            <FormItem prop="title" label="文章标题" class="formClass">
+              <Input type="text" v-model="editorData.title" placeholder="文章标题"/>
+            </FormItem>
+          </Col>
+          <Col :xs="24" :md="24" :lg="8" :xl="{span:4,offset:1}">
+          <RadioGroup v-model="editorData.origin">
+            <Radio label="原创" size="default"></Radio>
+            <Radio label="转载"size="default" ></Radio>
+          </RadioGroup>
+          </Col>
+          <Col :xs="24" :md="24" :lg="8" :xl="{span:8,offset:1}">
+            <FormItem prop="newsFrom" label="新闻来源">
+              <Input type="text" v-model="editorData.newsFrom" placeholder="新闻来源"/>
+            </FormItem>
+          </Col>
+        </Row> 
         <Row>
-          <Col span="8">
+          <Col :xs="24" :md="24" :lg="8" :xl="{span:7}">
           <FormItem prop="newsType" label="新闻类型">
             <Select
               v-model="editorData.newsType"
@@ -26,15 +41,16 @@
             </Select>
           </FormItem>
           </Col>
-          <Col span="8">
-          <FormItem prop="newsFrom" label="新闻来源">
-            <Input type="text" v-model="editorData.newsFrom" placeholder="新闻来源"/>
-          </FormItem>
+          <Col :xs="24" :md="24" :lg="8" :xl="{span:4,offset:1}">
+            <FormItem prop="newsAuthor" label="作者">
+              <Input type="text" disabled v-model="editorData.newsAuthor"/>
+            </FormItem>
           </Col>
-          <Col span="8">
-          <FormItem prop="newsAuthor" label="发布人">
-            <Input type="text" disabled v-model="editorData.newsAuthor"/>
-          </FormItem>
+          <Col :xs="24" :md="24" :lg="8" :xl="{span:10,offset:1}">
+            <FormItem prop="newsTags" label="标签">
+              <Input type="text" v-model="newsTags"/>
+              <Button icon="ios-add" type="dashed" size="small" @click="handleAdd">添加标签</Button>
+            </FormItem>
           </Col>
         </Row>
         <FormItem prop="newsContnet" label="文章内容">
@@ -49,8 +65,8 @@
         </FormItem>
         <FormItem>
           <Button type="primary" @click="handleSubmit('editorData')">提交</Button>
-          <Button style="margin-left: 8px" @click="handleReset">重置</Button>
-          <Button style="margin-left: 8px" type="primary" @click="handleSaveLocal('editorData')">存入草稿</Button>
+          <Button type="error" style="margin-left: 8px" @click="handleReset">重置</Button>
+          <Button style="margin-left: 8px" type="success" @click="handleSaveLocal('editorData')">存入草稿</Button>
         </FormItem>
       </Form>
     </Card>
@@ -70,7 +86,8 @@
           newsContnet: '',
           newsType: '',
           newsFrom: '',
-          newsAuthor: 'admin'
+          newsAuthor: 'admin',
+          origin: '原创'
         },
         ruleValidate: {
           title: [
@@ -176,6 +193,17 @@
         let test = localStorage.getItem("editorData");
         var obj = JSON.parse(test);
         if (obj) this.editorData = obj;// 设置内容
+      },
+      handleAdd () {
+        if (this.count.length) {
+            this.count.push(this.count[this.count.length - 1] + 1);
+        } else {
+            this.count.push(0);
+        }
+      },
+      handleClose (event, name) {
+        const index = this.count.indexOf(name);
+        this.count.splice(index, 1);
       }
     },
     mounted() {
@@ -185,5 +213,8 @@
 </script>
 
 <style scoped>
-
+.rowClass{
+  line-height: 32px;
+  font-size: 18px;
+}
 </style>
