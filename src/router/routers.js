@@ -97,9 +97,9 @@ export default [
         component: () => import('_c/admin/manage/Message.vue')
       },
       { // 分类/标签
-        path: '/label',
-        name: 'label',
-        component: () => import('_c/admin/manage/Label.vue')
+        path: '/tags',
+        name: 'tags',
+        component: () => import('_c/admin/manage/Tags.vue')
       }
     ]
   },

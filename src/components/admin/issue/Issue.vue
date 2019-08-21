@@ -14,7 +14,7 @@
             </FormItem>
           </Col>
           <Col :xs="24" :md="24" :lg="8" :xl="{span:4,offset:1}">
-          <RadioGroup v-model="editorData.origin">
+          <RadioGroup v-model="editorData.type">
             <Radio label="原创" size="default"></Radio>
             <Radio label="转载"size="default" ></Radio>
           </RadioGroup>
@@ -27,10 +27,10 @@
         </Row> 
         <Row>
           <Col :xs="24" :md="24" :lg="8" :xl="{span:7}">
-          <FormItem prop="newsType" label="新闻类型">
+          <FormItem prop="category" label="文章类型">
             <Select
-              v-model="editorData.newsType"
-              placeholder="新闻类型"
+              v-model="editorData.category"
+              placeholder="文章分类"
               style="width:200px">
               <Option
                 v-for="item in newsTypeList"
@@ -42,21 +42,36 @@
           </FormItem>
           </Col>
           <Col :xs="24" :md="24" :lg="8" :xl="{span:4,offset:1}">
-            <FormItem prop="newsAuthor" label="作者">
-              <Input type="text" disabled v-model="editorData.newsAuthor"/>
+            <FormItem prop="author" label="作者">
+              <Input type="text" disabled v-model="editorData.author"/>
             </FormItem>
           </Col>
           <Col :xs="24" :md="24" :lg="8" :xl="{span:10,offset:1}">
-            <FormItem prop="newsTags" label="标签">
-              <Input type="text" v-model="newsTags"/>
-              <Button icon="ios-add" type="dashed" size="small" @click="handleAdd">添加标签</Button>
+            <FormItem prop="label" label="标签">
+              <Tag
+              v-for="item in dynamicTags"
+              :key="item"
+              :name="item"
+              closable
+              @on-close="handleClose">
+                {{ item }}
+              </Tag>
+              <Input
+              ref="saveTagInput"
+              v-if="inputVisible"
+              v-model="inputValue"
+              @on-enter="handleInputConfirm"
+              @on-blur="handleInputConfirm"
+              size="small">
+              </Input>
+              <Button v-else icon="ios-add"  size="small" @click="showInput">添加标签</Button>
             </FormItem>
           </Col>
         </Row>
-        <FormItem prop="newsContnet" label="文章内容">
+        <FormItem prop="content" label="文章内容">
           <editor
             :cache="cache"
-            :value="editorData.newsContnet"
+            :value="editorData.content"
             :editorReset="editorReset"
             :valueType="valueType"
             @on-change="uploadChange"
@@ -83,11 +98,12 @@
       return {
         editorData: {
           title: '',
-          newsContnet: '',
-          newsType: '',
+          content: '',
+          type: '原创',
           newsFrom: '',
-          newsAuthor: 'admin',
-          origin: '原创'
+          author: 'admin',
+          category: '',
+          label: []
         },
         ruleValidate: {
           title: [
@@ -97,17 +113,17 @@
               trigger: 'blur'
             }
           ],
-          newsContnet: [
+          content: [
             {
               required: true,
               message: '请核实是否添加文章内容',
               trigger: 'blur',
             }
           ],
-          newsType: [
+          category: [
             {
               required: true,
-              message: '新闻类型不能为空',
+              message: '文章分类不能为空',
               trigger: 'blur',
               type: 'number'
             }
@@ -115,7 +131,7 @@
           newsFrom: [
             {
               required: true,
-              message: '新闻来源不能为空',
+              message: '文章来源不能为空',
               trigger: 'blur',
             }
           ],
@@ -137,6 +153,9 @@
           },
         ],
         editorReset: false,
+        dynamicTags: [],
+        inputValue: '',
+        inputVisible: false
       }
     },
     components: {
@@ -144,7 +163,7 @@
     },
     methods: {
       uploadData(data) {
-        this.editorData.newsContnet = data;
+        this.editorData.content = data;
       },
       uploadChange(html, text) {
         // console.log(text);
@@ -152,6 +171,7 @@
       handleSubmit(name) {
         this.$refs[name].validate((valid) => {
           if (valid) {
+            this.editorData.label = this.dynamicTags
             console.log(this.$refs.editorData.model);
             Message.success("添加成功")
           } else {
@@ -164,9 +184,10 @@
         localStorage.removeItem('editorCache');
         // this.$refs.editorData.resetFields();
         this.editorData.title = '';
-        this.editorData.newsContnet = '';
-        this.editorData.newsType = '';
+        this.editorData.content = '';
+        this.editorData.category = '';
         this.editorData.newsFrom = '';
+        this.dynamicTags = [];
         this.editorReset = true;
       },
       handleReset() {
@@ -175,7 +196,7 @@
           content: `<div class="modal-bd modal-bd2">
                         <p>确定重置该条信息？</p><br>
                         <p>如想恢复需重新手动添加</p>
-                     </div>`,
+                    </div>`,
           onOk: () => {
             this.deleteLocalStorage();
           }
@@ -183,6 +204,7 @@
       },
       handleSaveLocal(name) {
         const editorData = this.$refs[name].model;
+        this.editorData.label = this.dynamicTags
         if (this.cache) {
           localStorage.setItem('editorData', JSON.stringify(editorData));
         }
@@ -190,21 +212,41 @@
       },
       getLocalStorage() {
         // 如果本地有存储加载本地存储内容
-        let test = localStorage.getItem("editorData");
-        var obj = JSON.parse(test);
-        if (obj) this.editorData = obj;// 设置内容
-      },
-      handleAdd () {
-        if (this.count.length) {
-            this.count.push(this.count[this.count.length - 1] + 1);
-        } else {
-            this.count.push(0);
+        let localData = localStorage.getItem("editorData");
+        var data = JSON.parse(localData);
+        if (data) {
+          this.editorData = data;// 设置内容
+          this.dynamicTags = data.label;
         }
       },
+      showInput() {
+        this.inputVisible = true
+        this.$nextTick(_ => {
+          this.$refs.saveTagInput.$refs.input.focus();
+        });
+      },
+      handleInputConfirm () {
+        let flag = true;
+        let inputValue = this.inputValue
+        this.dynamicTags.forEach(v=>{  
+            if (inputValue === v) {
+                console.log(inputValue === v,"当前标签已存在")
+                return flag = false; 
+            }
+        })
+        if (inputValue && flag) {
+          this.dynamicTags.push(inputValue);
+        }
+        this.inputVisible = false
+        this.inputValue = ''
+      },
       handleClose (event, name) {
-        const index = this.count.indexOf(name);
-        this.count.splice(index, 1);
+        const index = this.dynamicTags.indexOf(name);
+        this.dynamicTags.splice(index, 1);
       }
+    },
+    created() {
+      // this.showInput()
     },
     mounted() {
       this.getLocalStorage();

@@ -1,10 +1,12 @@
 <template>
     <div>
-        <Input v-model="value" placeholder="请输入..." style="width: 300px" @on-enter="handleAdd"></Input>
+        <Input 
+        v-model="value" 
+        placeholder="请输入..." 
+        style="width: 300px" 
+        @on-enter="handleAdd"></Input>
         <Button icon="ios-plus-empty" type="dashed" size="big" @click="handleAdd" shape="circal">添加标签</Button>
-            <Tag v-for="item in count" :key="item" :name="item" closable @on-close="handleClose2">{{ item }}</Tag>
-        <Button size="big" @click="change" shape="circal">数组转化字符串</Button>
-        <Button size="big" @click="change1" shape="circal">字符串转化数组</Button>
+        <Tag v-for="item in count" :key="item" :name="item" closable @on-close="handleClose2">{{ item }}</Tag>
     </div>
 </template>
 <script>
@@ -12,11 +14,11 @@ export default {
     name: 'demo',
     data() {
         return {
-            count: [0,1,2],
+            count: [],
             value: ''
         }
     },
-     methods: {
+    methods: {
         handleAdd () { 
         if (this.value!=="") {
             this.count.push(this.value);
