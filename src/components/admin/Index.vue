@@ -1,6 +1,6 @@
 <template>
     <div class="layout">
-       <Layout>
+    <Layout>
         <Sider
             class="layout-sider"
             ref="side"
@@ -24,6 +24,10 @@
                         <Icon type="ios-list-box-outline"/>
                         <span>文章管理</span>
                     </MenuItem>
+                    <MenuItem name="pictureManage" to='/picture'>
+                        <Icon type="ios-reverse-camera-outline" />
+                        <span>图片管理</span>
+                    </MenuItem>
                     <MenuItem name="commentManage" to='/comment'>
                         <Icon type="ios-paper-outline"/>
                         <span>评论管理</span>
@@ -32,7 +36,7 @@
                         <Icon type="ios-chatboxes-outline"/>
                         <span>留言管理</span>
                     </MenuItem>
-                    <MenuItem name="label" to='/label'>
+                    <MenuItem name="tags" to='/tags'>
                         <Icon type="ios-pricetag-outline"/>
                         <span>分类/标签</span>
                     </MenuItem>
@@ -93,41 +97,39 @@
 </template>
 <script>
 import TagsNav from './tags/tags-nav'
-import Home from './home/Home'
-import Side from './side/Menu'
 
 export default {
-  data () {
+data () {
     return {
-      isCollapsed: false,
-      visible: false,
-      theme: 'dark',
-      activeName: ''
+        isCollapsed: false,
+        visible: false,
+        theme: 'dark',
+        activeName: '',
+        value: ''
     }
-  },
-  components: {
+},
+components: {
     TagsNav,
-    Home
-  },
-  computed: {
+},
+computed: {
     rotateIcon () {
-      return [
-        'menu-icon',
-        this.isCollapsed ? 'rotate-icon' : ''
-      ]
+        return [
+            'menu-icon',
+            this.isCollapsed ? 'rotate-icon' : ''
+        ]
     },
     menuitemClasses () {
-      return [
-        'menu-item',
-        this.isCollapsed ? 'collapsed-menu' : ''
-      ]
+        return [
+            'menu-item',
+            this.isCollapsed ? 'collapsed-menu' : ''
+        ]
     }
-  },
-  methods: {
+},
+methods: {
     collapsedSider () {
-      this.$refs.side.toggleCollapse()
+        this.$refs.side.toggleCollapse()
     }
-  }
+}
 }
 </script>
 <style lang="less" scoped>

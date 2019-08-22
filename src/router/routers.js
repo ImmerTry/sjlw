@@ -67,6 +67,9 @@ export default [
   {
     path: '/issue',
     name: 'issue',
+    meta: {
+      requiresAuth: true
+    },
     component: Main,
     children: [
       { // 发布文章
@@ -78,6 +81,9 @@ export default [
   },
   {
     path: '/manage',
+    meta: {
+      requiresAuth: true
+    },
     name: 'manage',
     component: Main,
     children: [
@@ -100,12 +106,20 @@ export default [
         path: '/tags',
         name: 'tags',
         component: () => import('_c/admin/manage/Tags.vue')
+      },
+      { // 图片管理
+        path: '/picture',
+        name: 'picture',
+        component: () => import('_c/admin/manage/Picture.vue')
       }
     ]
   },
   {
     path: '/setting',
     name: 'setting',
+    meta: {
+      requiresAuth: true
+    },
     component: Main,
     children: [
       { // 个人信息

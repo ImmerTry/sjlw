@@ -77,33 +77,33 @@
         show-sizer
         style="margin: 10px 0;float:right;"/>
         <Button
-        style="margin: 10px 0;"
-        type="primary"
-        @click="exportExcel">
-        <Icon type="arrow-down-a"/>&nbsp;&nbsp;导出为Csv文件
+            style="margin: 10px 0;"
+            type="primary"
+            @click="exportExcel">
+            <Icon type="arrow-down-a"/>&nbsp;&nbsp;导出为Csv文件
         </Button>
 
         <div
-        v-if="searchable && searchPlace === 'bottom'"
-        class="search-con search-con-top">
-        <Select
-            v-model="searchKey"
-            class="search-col">
-            <Option
-            v-for="item in columns"
-            v-if="item.key !== 'handle'"
-            :value="item.key"
-            :key="`search-col-${item.key}`">
-            {{ item.title }}
-            </Option>
-        </Select>
-        <Input
-            placeholder="输入关键字搜索"
-            class="search-input"
-            v-model="searchValue"/>
-        <Button class="search-btn" type="primary">
-            <Icon type="search"/>&nbsp;&nbsp;搜索
-        </Button>
+            v-if="searchable && searchPlace === 'bottom'"
+            class="search-con search-con-top">
+            <Select
+                v-model="searchKey"
+                class="search-col">
+                <Option
+                v-for="item in columns"
+                v-if="item.key !== 'handle'"
+                :value="item.key"
+                :key="`search-col-${item.key}`">
+                {{ item.title }}
+                </Option>
+            </Select>
+            <Input
+                placeholder="输入关键字搜索"
+                class="search-input"
+                v-model="searchValue"/>
+            <Button class="search-btn" type="primary">
+                <Icon type="search"/>&nbsp;&nbsp;搜索
+            </Button>
         </div>
         <a id="hrefToExportTable"
         style="display: none;width: 0px;height: 0px;"></a>
