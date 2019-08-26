@@ -77,7 +77,7 @@
                         </Dropdown>
                     </div>
                     <div class="layout-header-avatar">
-                        <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
+                        <Avatar :src="userAvator"/>
                     </div>
                 </div>
             </Header>
@@ -123,6 +123,10 @@ computed: {
             'menu-item',
             this.isCollapsed ? 'collapsed-menu' : ''
         ]
+    },
+    userAvator () {
+        const avatar = this.$store.state.userInfo.avatar
+        return avatar === null ? '' : avatar
     }
 },
 methods: {

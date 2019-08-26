@@ -53,10 +53,37 @@ export default {
   methods: {
     handleSubmit (name) {
       this.$refs[name].validate((valid) => {
+        const data = this.$refs[name].model
         if (valid) {
-          this.$Message.success('Success!')
+          axios.post('/user/login', {
+            userName: data.userName,
+            password: data.password
+          }).then(response => {
+            const data = response.data
+            if (data.code === 200) {
+              this.$Message.success('登录成功')
+              const token = data.data
+              store.commit('setToken', token)
+              // 通过 token 解析 用户信息
+              axios.post('/user/parseToken',{
+                token
+              }).then(response => {
+                const parseData = response.data.data
+                store.commit('setUserInfo',parseData)
+              })
+              if (store.state.token) {
+                this.$router.push('/index')
+              } else {
+                this.$router.replace('/login')
+              }
+            } else {
+              this.$Message.error(data.msg)
+            }
+          }).catch(error => {
+            console.log(error)
+            this.$Message.error('路径请求有误')
+          })
         } else {
-          this.$Message.error('Fail!')
         }
       })
     }

@@ -1,6 +1,6 @@
 export default {
-  login (state, v) {
-    state.userinfo = v
+  setUserInfo (state, v) {
+    state.userInfo = v
   },
   setToken (state, token) {
     state.token = token

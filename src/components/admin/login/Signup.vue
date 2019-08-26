@@ -6,7 +6,7 @@
         :mask-closable="false"
         class-name="vertical-center-modal"
         @on-cancel="cancel"
-       >
+      >
         <div class="header-modal">
           <h1>创建你的账号</h1>
         </div>
@@ -14,7 +14,7 @@
             <Form ref="formInline" :model="formInline" :rules="ruleInline" class="form">
               <FormItem prop="nickName">
                   <Input type="text" v-model="formInline.nickName" placeholder="昵称">
-                   <Icon type="ios-person-outline" slot="prepend"/>
+                  <Icon type="ios-person-outline" slot="prepend"/>
                   </Input>
               </FormItem>
               <FormItem prop="userName">
@@ -30,7 +30,7 @@
           </Form>
         </div>
         <div class="footer">
-          <Button shape="circle" type="primary">下一步</Button>
+          <Button shape="circle" type="primary" @click="handleSubmit('formInline')">下一步</Button>
         </div>
         <div slot="footer"></div>
       </Modal>
@@ -62,6 +62,8 @@
     </div>
 </template>
 <script>
+import axios from 'axios'
+
 export default {
   name: 'Signup',
   props: ['showHandlerFlag', 'handlerClosable'],
@@ -91,7 +93,34 @@ export default {
   methods: {
     cancel () {
       this.$emit('updateModalStatus', false)
-    }
+    },
+    handleSubmit(name) {
+      this.$refs[name].validate((valid) => {
+        const data = this.$refs[name].model
+        if (valid) {
+          axios.post('/user/save',{
+            userName: data.userName,
+            password: data.password,
+            nickName: data.nickName
+          }).then(response => {
+            const data = response.data
+            if (data.code === 200) {
+              this.$Message.success(data.msg)
+              this.cancel()
+            } else {
+              this.$Message.error(data.msg)
+              this.handleReset('formInline')
+              this.cancel()
+            }
+          }).catch(error => {
+            this.$Message.error(error)
+          })
+        }
+      })
+    },
+    handleReset (name) {
+      this.$refs[name].resetFields();
+    },
   },
   watch: {
     'handlerModal': function (val) {

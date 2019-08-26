@@ -7,7 +7,7 @@
       </p>
       <Form ref="passForm" :model="passForm" :rules="ruleValidate" :label-width="120">
         <FormItem label="当前密码" prop="curPass">
-          <Input type="text" disabled v-model="passForm.curPass" style="width: 200px;"/>
+          <Input type="text"  v-model="passForm.curPass" style="width: 200px;" @on-blur="handleIsPassword"/>
         </FormItem>
         <FormItem label="新密码" prop="createPass">
           <Input type="password" v-model="passForm.createPass" style="width: 200px;"/>
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-  // import {getUserInfo} from '@/api/user'
+import axios from 'axios'
 
   export default {
     name: 'modify',
@@ -64,6 +64,9 @@
             console.log(this.passForm.checkPass);
           }
         });
+      },
+      handleIsPassword() {
+        
       }
     },
     mounted() {

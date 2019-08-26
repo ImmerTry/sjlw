@@ -91,6 +91,7 @@
 <script>
   import Editor from '../editor/Editor'
   import {Message} from 'iview'
+  import axios from 'axios'
 
   export default {
     name: 'issue',

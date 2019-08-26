@@ -1,5 +1,20 @@
 <template>
   <div>
+    <Modal
+      v-model="showModal"
+      :title="modal.title"
+      :loading="loading"
+      :closable="true">
+      <Form ref="formData" :model="formData" :label-width="80">
+        <FormItem style="margin-top:20px" label="分类名称" prop="categoryId">
+          <Input type="text" v-model="formData.categoryId"/>
+        </FormItem>
+        <FormItem>
+          <Button style="float:right" type="primary">确认</Button>
+          <Button style="float:right;margin-right:8px" type="default">取消</Button>
+        </FormItem>
+      </Form>
+    </Modal>
     <Card shadow>
       <Row>
         <Col :xs="24" :md="24" :lg="24" :xl="{span:10,offset:1}">
@@ -28,18 +43,19 @@
               <Icon type="ios-paper-outline" />
               分类管理
             </p>
-                <Tables
-                ref="tables"
-                searchable
-                searchPlace="top"
-                :border="border"
-                v-model="categoryData"
-                :tableDatas="categoryData"
-                :columns="categoryColumns"
-                :pageTotal="pageTotal"
-                :pageIndex="pageIndex"
-                :pageSize="pageSize">
-                </Tables>
+            <Tables
+            ref="tables"
+            searchable
+            searchPlace="top"
+            :border="border"
+            v-model="categoryData"
+            :tableDatas="categoryData"
+            :columns="categoryColumns"
+            :pageTotal="pageTotal"
+            :pageIndex="pageIndex"
+            :pageSize="pageSize"
+            @showMask="showMask">
+            </Tables>
           </Card>
         </Col>
       </Row>
@@ -236,16 +252,73 @@
             pkId: 3,
             categoryId: 'you'
           }
-        ]
+        ],
+        showModal: false,
+        loading: false,
+        modal: {
+          title: '',
+          option: 'add',
+        },
+        formData: {}
       }
     },
     methods: {
-      handleDelete(data) {
-        console.log(data)
+      handleDelete(params) {
+        console.log(params)
       },
-      handleEdit(data) {
-        console.log(data)
-      }
+      handleEdit(params) {
+        console.log(params)
+        this.modal = {
+          title: "编辑分类信息",
+          option: "edifCategory"
+        }
+        this.formData = {
+          pkId: params.row.pkId,
+          categoryId: params.row.categoryId
+        }
+        this.showModal = true
+      },
+      handleAdd() {
+        this.modal = {
+          title: "添加分类信息",
+          option: "addCategory"
+        }
+      },
+      showMask(mask) {
+        this.showModal = mask
+        this.handleAdd()
+      },
+      asyncOK() {
+        // this.$refs.formData.validate(valid => {
+        //   if (valid) {
+        //     let news = this.$refs.formData.model;
+        //     let option = this.modal.option;
+        //     if (option === "add") {
+        //       insertTableData(news).then(res => {
+        //         // console.log(res.data);
+        //         this.asyncNo();
+        //         Message.success(res.data.data);
+        //         this.initTableData()
+        //       })
+        //     } else {
+        //       updateTableData(news).then(res => {
+        //         this.asyncNo();
+        //         Message.success(res.data.data);
+        //         this.initTableData()
+        //       })
+        //     }
+        //     // console.log(this.modal.opotion);
+        //   } else {
+        //     console.log(this.$refs.formData);
+        //     Message.error("验证未通过");
+        //   }
+        // });
+      },
+      asyncNo() {
+        this.$refs.formData.resetFields();//refs对应form的ref属性
+      
+        // this.initTableData()
+      },
     }
   }
 </script>

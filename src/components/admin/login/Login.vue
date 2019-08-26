@@ -136,9 +136,16 @@ export default {
           }).then(response => {
             const data = response.data
             if (data.code === 200) {
-              this.$Message.success('登录成功')
+              this.$Message.success(data.msg)
               const token = data.data
               store.commit('setToken', token)
+              // 通过 token 解析 用户信息
+              axios.post('/user/parseToken',{
+                token
+              }).then(response => {
+                const parseData = response.data.data
+                store.commit('setUserInfo',parseData)
+              })
               if (store.state.token) {
                 this.$router.push('/index')
               } else {
@@ -151,7 +158,6 @@ export default {
             console.log(error)
             this.$Message.error('路径请求有误')
           })
-        } else {
         }
       })
     },
