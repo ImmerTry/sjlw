@@ -27,9 +27,6 @@ module.exports = {
         pathRewrite: {
           '^/api': ''
         }
-      },
-      '/foo': {
-        target: '<other_url>'
       }
     }// 配置多个代理
   }

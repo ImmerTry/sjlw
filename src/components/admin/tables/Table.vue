@@ -363,7 +363,6 @@ methods: {
         this.addAble = value
     },
     handleTableData(value) {
-        console.log(value,"数据");
         this.insideTableData = value
     }
 },
@@ -374,7 +373,7 @@ watch: {
         this.setDefaultSearchKey()
     },
     tableDatas(value) {
-        console.log("监听："+ value + 'tableDatas')
+        // console.log("监听："+ value + 'tableDatas')
         this.handleTableData(this.tableDatas)
     },
     value(val) {
@@ -385,7 +384,7 @@ watch: {
         this.pTotal = pageTotal
     },
     pTotal(newV) {
-        console.log("监听："+ newV + '子组件Total')
+        // console.log("监听："+ newV + '子组件Total')
     },
     pSize(newV) {
         this.$emit('changeSize', newV)

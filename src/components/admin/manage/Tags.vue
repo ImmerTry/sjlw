@@ -5,13 +5,13 @@
       :title="modal.title"
       :loading="loading"
       :closable="true">
-      <Form ref="formData" :model="formData" :label-width="80">
-        <FormItem style="margin-top:20px" label="分类名称" prop="categoryId">
-          <Input type="text" v-model="formData.categoryId"/>
+      <Form ref="formData" :model="formData" :rules="ruleValidate" :label-width="80">
+        <FormItem style="margin-top:20px" label="分类名称" prop="categoryName">
+          <Input type="text" v-model="formData.categoryName"/>
         </FormItem>
         <FormItem>
-          <Button style="float:right" type="primary">确认</Button>
-          <Button style="float:right;margin-right:8px" type="default">取消</Button>
+          <Button style="float:right" type="primary" @click="handleAddCategory">确认</Button>
+          <Button style="float:right;margin-right:8px" type="default" @click="handleCancel">取消</Button>
         </FormItem>
       </Form>
     </Modal>
@@ -65,6 +65,7 @@
 
 <script>
   import Tables from '../tables/Table'
+  import axios from 'axios'
 
   export default {
     name: 'tags',
@@ -74,18 +75,7 @@
     data() {
       return {
         tableData: [
-          {
-            pkId: 1,
-            labelId: 'test'
-          },
-          {
-            pkId: 2,
-            labelId: 'test'
-          },
-          {
-            pkId: 3,
-            labelId: 'test'
-          }
+          
         ],
         border: true,
         pageSize: 10,
@@ -98,7 +88,7 @@
           },
           {
             title: '标签名称',
-            key: 'labelId'
+            key: 'labelName'
           },
           {
             title: '操作',
@@ -172,7 +162,7 @@
           },
           {
             title: '分类名称',
-            key: 'categoryId'
+            key: 'categoryName'
           },
           {
             title: '操作',
@@ -240,18 +230,7 @@
           }
         ],
         categoryData: [
-          {
-            pkId: 1,
-            categoryId: 'hello'
-          },
-          {
-            pkId: 2,
-            categoryId: 'world'
-          },
-          {
-            pkId: 3,
-            categoryId: 'you'
-          }
+          
         ],
         showModal: false,
         loading: false,
@@ -259,22 +238,44 @@
           title: '',
           option: 'add',
         },
-        formData: {}
+        formData: {
+          pkId:'',
+          categoryName:''
+        },
+        ruleValidate: {
+          categoryName: [
+            {
+              required: true,
+              message: '分类名称不能为空',
+              trigger: 'blur'
+            }
+          
+          ]
+        }
       }
     },
     methods: {
       handleDelete(params) {
-        console.log(params)
+        const pkId = params.row.pkId
+        axios.post('/user/deleteCategory',{
+          pkId
+        }).then(response =>{
+          if (response.data.code === 200) {
+            this.$Message.success(response.data.msg)
+            this.initTableData()
+          } else {
+            this.$Message.success(response.data.msg)
+          }
+        }).catch(error =>{})
       },
       handleEdit(params) {
-        console.log(params)
         this.modal = {
           title: "编辑分类信息",
           option: "edifCategory"
         }
         this.formData = {
           pkId: params.row.pkId,
-          categoryId: params.row.categoryId
+          categoryName: params.row.categoryName
         }
         this.showModal = true
       },
@@ -288,37 +289,70 @@
         this.showModal = mask
         this.handleAdd()
       },
-      asyncOK() {
-        // this.$refs.formData.validate(valid => {
-        //   if (valid) {
-        //     let news = this.$refs.formData.model;
-        //     let option = this.modal.option;
-        //     if (option === "add") {
-        //       insertTableData(news).then(res => {
-        //         // console.log(res.data);
-        //         this.asyncNo();
-        //         Message.success(res.data.data);
-        //         this.initTableData()
-        //       })
-        //     } else {
-        //       updateTableData(news).then(res => {
-        //         this.asyncNo();
-        //         Message.success(res.data.data);
-        //         this.initTableData()
-        //       })
-        //     }
-        //     // console.log(this.modal.opotion);
-        //   } else {
-        //     console.log(this.$refs.formData);
-        //     Message.error("验证未通过");
-        //   }
-        // });
+      handleAddCategory() {
+        this.$refs.formData.validate(valid => {
+          if (valid) {
+            let obj = this.$refs.formData.model
+            let option = this.modal.option;
+            console.log(option,"opation")
+            if (option === "addCategory") {
+              axios.post('/user/addCategory',{
+                categoryName: obj.categoryName
+              }).then(response =>{
+                this.showModal = false
+                if (response.data.code === 200) {
+                  this.$Message.success(response.data.msg)
+                  this.initTableData()
+                } else {
+                  this.$Message.error(response.data.msg)
+                }
+              }).catch(error =>{})
+            } else {
+              const categoryName = this.$refs.formData.model.categoryName
+              const pkId = this.$refs.formData.model.pkId
+              axios.post('/user/updateCategory',{
+                pkId,
+                categoryName
+              }).then(response =>{
+                this.showModal = false
+                if (response.data.code === 200) {
+                  this.$Message.success(response.data.msg)
+                  this.initTableData()
+                } else {
+                  this.$Message.error(response.data.msg)
+                }
+              }).catch(error =>{})
+            }
+          } else {
+            this.$Message.error("验证未通过")
+          }
+        });
       },
-      asyncNo() {
+      handleCancel() {
         this.$refs.formData.resetFields();//refs对应form的ref属性
-      
-        // this.initTableData()
+        this.showModal =false
       },
+      initTableData(){
+        axios.post('/user/getTableData',{
+          pageSize: this.pageSize,
+          pageIndex: this.pageIndex
+        }).then(response =>{
+          if (response.data.code === 200) {
+            const map = response.data.data
+            this.categoryData = map.categoryList
+            this.pageSize = map.pageSize;
+            this.pageTotal = map.categoryList.length;
+            this.pageIndex = map.pageIndex
+          } else {
+            this.$Message.error(response.data.msg)
+          }
+        }).catch(error =>{
+
+        })
+      }
+    },
+    mounted() {
+      this.initTableData()
     }
   }
 </script>
