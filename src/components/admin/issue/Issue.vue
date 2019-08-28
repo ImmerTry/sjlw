@@ -15,13 +15,14 @@
           </Col>
           <Col :xs="24" :md="24" :lg="8" :xl="{span:4,offset:1}">
           <RadioGroup v-model="editorData.type">
-            <Radio label="原创" size="default"></Radio>
-            <Radio label="转载"size="default" ></Radio>
+            <Radio v-for="item in typeList" :label="item.value" :key="item.value">
+              <span>{{item.label}}</span>
+            </Radio>
           </RadioGroup>
           </Col>
           <Col :xs="24" :md="24" :lg="8" :xl="{span:8,offset:1}">
-            <FormItem prop="newsFrom" label="新闻来源">
-              <Input type="text" v-model="editorData.newsFrom" placeholder="新闻来源"/>
+            <FormItem prop="articleFrom" label="新闻来源">
+              <Input type="text" v-model="editorData.articleFrom" placeholder="新闻来源"/>
             </FormItem>
           </Col>
         </Row> 
@@ -31,12 +32,13 @@
             <Select
               v-model="editorData.category"
               placeholder="文章分类"
-              style="width:200px">
+              style="width:200px"
+              @on-change="changeSelect">
               <Option
                 v-for="item in newsTypeList"
-                :key="item.key"
-                :value="item.key">
-                {{item.value}}
+                :key="item.pkId"
+                :value="item.pkId">
+                {{item.categoryName}}
               </Option>
             </Select>
           </FormItem>
@@ -100,11 +102,11 @@
         editorData: {
           title: '',
           content: '',
-          type: '原创',
-          newsFrom: '',
+          type: 0,
+          articleFrom: '',
           author: 'admin',
           category: '',
-          label: []
+          labels: []
         },
         ruleValidate: {
           title: [
@@ -129,7 +131,7 @@
               type: 'number'
             }
           ],
-          newsFrom: [
+          articleFrom: [
             {
               required: true,
               message: '文章来源不能为空',
@@ -140,17 +142,15 @@
         valueType: 'html',
         cache: true,
         newsTypeList: [
+        ],
+        typeList:[
           {
-            value: '时政要闻',
-            key: 0
+            label:'原创',
+            value: 0
           },
           {
-            value: '成功案例',
-            key: 1
-          },
-          {
-            value: '企业新闻',
-            key: 2
+            label:'转载',
+            value: 1
           },
         ],
         editorReset: false,
@@ -172,9 +172,17 @@
       handleSubmit(name) {
         this.$refs[name].validate((valid) => {
           if (valid) {
-            this.editorData.label = this.dynamicTags
+            this.editorData.labels = this.dynamicTags
+            const article = this.$refs.editorData.model
             console.log(this.$refs.editorData.model);
-            Message.success("添加成功")
+            axios.post('/user/issue',article).then(res =>{
+              if (res.data.code === 200) {
+                Message.success(res.data.msg)
+                this.deleteLocalStorage()
+              } else {
+                Message.error(res.data.msg)
+              }
+            }).catch(error =>{})
           } else {
             Message.error("未通过验证")
           }
@@ -187,7 +195,8 @@
         this.editorData.title = '';
         this.editorData.content = '';
         this.editorData.category = '';
-        this.editorData.newsFrom = '';
+        this.editorData.articleFrom = '';
+        this.editorData.type = 0;
         this.dynamicTags = [];
         this.editorReset = true;
       },
@@ -244,6 +253,16 @@
       handleClose (event, name) {
         const index = this.dynamicTags.indexOf(name);
         this.dynamicTags.splice(index, 1);
+      },
+      changeSelect(category) {
+          this.editorData.category = category;
+      },
+      handleGetCategory() {
+        axios.get('/user/getCategory').then(res =>{
+          if (res.data.code === 200) {
+            this.newsTypeList = res.data.data
+          }
+        }).catch(error =>{})
       }
     },
     created() {
@@ -251,6 +270,7 @@
     },
     mounted() {
       this.getLocalStorage();
+      this.handleGetCategory();
     }
   }
 </script>
